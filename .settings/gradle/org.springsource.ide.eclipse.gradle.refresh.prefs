@@ -1,5 +1,9 @@
 #org.springsource.ide.eclipse.gradle.core.actions.GradleRefreshPreferences
+<<<<<<< HEAD
 #Sun Dec 21 18:38:49 PST 2014
+=======
+#Fri Dec 19 22:32:51 PST 2014
+>>>>>>> ac6383259288cb81d4281fa7a4f8adcf411848e0
 addResourceFilters=true
 afterTasks=afterEclipseImport;
 beforeTasks=cleanEclipse;eclipse;
