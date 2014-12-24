@@ -73,6 +73,7 @@ public class TextureManager extends Manager<Texture>
 			return true;
 		}
 		rsrc.fileName = fileName;
+		// Dispose resource
 		rsrc.resource = new Texture(file);
 		return true;
 	}
