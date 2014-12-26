@@ -4,12 +4,13 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MGA extends ApplicationAdapter 
 {
 	SpriteBatch batch;
-	Texture img;
+	Sprite img;
 	
 	@Override
 	public void create () 
@@ -17,8 +18,14 @@ public class MGA extends ApplicationAdapter
 		batch = new SpriteBatch();
 		//img = new Texture("badlogic.jpg"); 
 		TextureManager texManager = new TextureManager();
-		img = texManager.loadResource("hellopic", "badlogic.jpg");
-		texManager.updateResource("hellopic", "dfsfdajklf;js");
+		SpriteHandler sprHandler = new SpriteHandler(
+			texManager.loadResource(TextureManager.DEF_FILE_NAME, 
+			TextureManager.DEF_RSRC_NAME));
+		sprHandler.setTextureManager(texManager);
+		img = sprHandler.createSprite("THIS SHOULD WORK, BACON", 
+			"shouldwork", "badlogic.jpg");
+		sprHandler.resourceDeleted("badlogic.jpg");
+		texManager.unloadResource("shouldwork");
 	}
 
 	@Override
@@ -27,7 +34,7 @@ public class MGA extends ApplicationAdapter
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		img.draw(batch);
 		batch.end();
 	}
 	

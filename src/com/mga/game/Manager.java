@@ -30,11 +30,7 @@ public abstract class Manager<T>
 	/// if so return false.
 	public boolean resourceExists(String nameID)
 	{
-		if (goLHMap.keySet().contains(nameID))
-		{
-			return true;
-		}
-		return false;
+		return goLHMap.keySet().contains(nameID);
 	}
 
 	public Resource getErrorResource()
