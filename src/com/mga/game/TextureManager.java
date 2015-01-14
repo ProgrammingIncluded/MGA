@@ -4,11 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 
-public class TextureManager extends Manager<Texture>
+public class TextureManager extends ResourceManager<Texture>
 {
 	/* Static Values */
-	static final String DEF_RSRC_NAME = "ERRTEX";
-	static final String DEF_FILE_NAME = "ERRTEX.png";
+	static final String DEF_RSRC_NAME = Config.DEF_TEX_NAME;
+	static final String DEF_FILE_NAME = Config.DEF_TEX_FILE_NAME;
 	
 	public TextureManager()
 	{

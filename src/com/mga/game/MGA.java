@@ -2,6 +2,7 @@ package com.mga.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -18,14 +19,16 @@ public class MGA extends ApplicationAdapter
 		batch = new SpriteBatch();
 		//img = new Texture("badlogic.jpg"); 
 		TextureManager texManager = new TextureManager();
-		SpriteHandler sprHandler = new SpriteHandler(
-			texManager.loadResource(TextureManager.DEF_FILE_NAME, 
-			TextureManager.DEF_RSRC_NAME));
+		SpriteHandler sprHandler =
+			new SpriteHandler(texManager.getErrorResource().resource);
 		sprHandler.setTextureManager(texManager);
-		img = sprHandler.createSprite("THIS SHOULD WORK, BACON", 
-			"shouldwork", "badlogic.jpg");
-		sprHandler.resourceDeleted("badlogic.jpg");
-		texManager.unloadResource("shouldwork");
+		img = sprHandler.createSprite("testSprite", 
+			"shouldwork", "texture/badlogic.jpg");
+		sprHandler.resourceDeleted("texture/badlogic.jpg");
+		texManager.removeResource("shouldword");
+		SoundHandler sndHandler = new SoundHandler();
+		Sound snd = sndHandler.createSound("TestSound", "audio/stroll.wav");
+		snd.play();
 	}
 
 	@Override

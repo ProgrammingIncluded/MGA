@@ -2,13 +2,13 @@ package com.mga.game;
 
 import java.util.LinkedHashMap;
 
-public abstract class Manager<T>
+public abstract class ResourceManager<T>
 {
 	/* Private Variables */
 	private LinkedHashMap<String, Resource> goLHMap; // rsrcName, Resource
 	private Resource defRsrc;
 
-	public Manager(String defRsrcName, String defFileName, T defRsrcObj)
+	public ResourceManager(String defRsrcName, String defFileName, T defRsrcObj)
 	{
 		goLHMap = new LinkedHashMap<String, Resource>();
 		defRsrc = new Resource();
@@ -25,7 +25,7 @@ public abstract class Manager<T>
 	public abstract T loadResource(String name, String filename);
 	public abstract boolean unloadResource(String name);
 	public abstract boolean updateResource(String name, String filename);
-
+	
 	/// Checks the internal map to see whether the name of the resource exists,
 	/// if so return false.
 	public boolean resourceExists(String nameID)
@@ -33,19 +33,10 @@ public abstract class Manager<T>
 		return goLHMap.keySet().contains(nameID);
 	}
 
-	public Resource getErrorResource()
+	protected Resource getErrorResource()
 	{
 		return defRsrc;
 	}
-
-	/*
-	// Find a way to return constant. Final keyword perhaps?
-	// TODO: Should I delete this function and favor Resource?
-	public T getErrorRsrcObj()
-	{
-		return defRsrc.resource;
-	}
-	 */
 
 	/* Mutators */
 	protected boolean addResource(Resource rsrc)

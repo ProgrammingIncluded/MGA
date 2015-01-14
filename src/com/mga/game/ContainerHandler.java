@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-public abstract class Handler<T>
+public abstract class ContainerHandler<T>
 {
 	/* Private Variables  */
 	private LinkedHashMap <String, Container> containers; // name, Container
 	private final Container defContainer; // Must have constant Default Texture
 	
-	Handler(String defContainerName, String defFileName, T containerObj)
+	ContainerHandler(String defContainerName, String defFileName, T containerObj)
 	{
 		containers = new LinkedHashMap<String, Container>();
 		defContainer =  new Container(defContainerName, 

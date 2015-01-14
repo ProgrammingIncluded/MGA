@@ -1,0 +1,9 @@
+# Setting code
+.settings
+
+# Builds and Bins
+build
+bin
+
+#Gradle
+build.gradle

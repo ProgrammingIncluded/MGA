@@ -6,11 +6,11 @@ import java.util.Iterator;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class SpriteHandler extends Handler<Sprite>
+public class SpriteHandler extends ContainerHandler<Sprite>
 {
 	/* Constant Variables */
-	static final String DEF_CONT_NAME = "ERRSPRITE";
-	static final String DEF_FILE_NAME = "ERRTEX.png";
+	static final String DEF_CONT_NAME = Config.DEF_SPR_NAME;
+	static final String DEF_FILE_NAME = Config.DEF_TEX_FILE_NAME;
 	
 	/* Private */
 	private TextureManager texManager; // No need to delete... 
@@ -26,7 +26,9 @@ public class SpriteHandler extends Handler<Sprite>
 		super(defContainerName, defFileName, containerObj);
 		texManager = null;
 	}
-
+	
+	/// Call when you delete a sprite or release it from member.
+	/// Will point all other sprites to a default sprite.
 	@Override
 	public boolean resourceDeleted(String resourceFileName)
 	{
