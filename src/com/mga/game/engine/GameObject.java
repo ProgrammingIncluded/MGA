@@ -1,4 +1,4 @@
-package com.mga.game;
+package com.mga.game.engine;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

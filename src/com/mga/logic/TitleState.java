@@ -1,38 +1,39 @@
-package com.mga.game;
+package com.mga.logic;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mga.game.engine.State;
+import com.mga.game.engine.StateManager;
 
-public class MGA extends ApplicationAdapter 
+public class TitleState extends State
 {
 	SpriteBatch batch;
 	Sprite img;
 	
+	public TitleState()
+	{
+		super();
+	}
+	
 	@Override
-	public void create () 
+	public void startUp(StateManager stateM)
 	{
 		batch = new SpriteBatch();
 		//img = new Texture("badlogic.jpg"); 
-		TextureManager texManager = new TextureManager();
-		SpriteHandler sprHandler =
-			new SpriteHandler(texManager.getErrorResource().resource);
 		sprHandler.setTextureManager(texManager);
 		img = sprHandler.createSprite("testSprite", 
 			"shouldwork", "texture/badlogic.jpg");
 		sprHandler.resourceDeleted("texture/badlogic.jpg");
 		texManager.removeResource("shouldword");
-		SoundHandler sndHandler = new SoundHandler();
 		Sound snd = sndHandler.createSound("TestSound", "audio/stroll.wav");
 		snd.play();
 	}
 
 	@Override
-	public void render () 
+	public void draw(StateManager stateM)
 	{
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -40,28 +41,35 @@ public class MGA extends ApplicationAdapter
 		img.draw(batch);
 		batch.end();
 	}
-	
-	@Override
-    public void resize (int width, int height) 
-	{ 
-   
-	}
 
 	@Override
-	public void pause () 
-	{ 
-    
-	}
-
-	@Override
-    public void resume () 
+	public void update(StateManager stateM)
 	{
-    
-    }
+		
+	}
 
 	@Override
-    public void dispose ()
-	{ 
+	public void resize(int width, int height)
+	{
 		
-    }
+	}
+
+	@Override
+	public void pause(StateManager stateM)
+	{
+		
+	}
+
+	@Override
+	public void resume(StateManager stateM)
+	{
+		
+	}
+
+	@Override
+	public void cleanUp(StateManager stateM)
+	{
+		
+	}
+	
 }

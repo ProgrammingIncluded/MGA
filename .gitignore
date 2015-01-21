@@ -1,9 +1,12 @@
-# Setting code
+# Per User Basis files
 .settings
 
 # Builds and Bins
 build
 bin
 
-#Gradle
+# Gradle
 build.gradle
+
+# XML Files
+.xml

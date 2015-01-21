@@ -1,4 +1,4 @@
-package com.mga.game;
+package com.mga.game.engine;
 
 import java.util.LinkedHashMap;
 
@@ -32,14 +32,14 @@ public abstract class ResourceManager<T>
 	{
 		return goLHMap.keySet().contains(nameID);
 	}
-
-	protected Resource getErrorResource()
+	
+	public Resource getErrorResource()
 	{
 		return defRsrc;
 	}
 
 	/* Mutators */
-	protected boolean addResource(Resource rsrc)
+	public boolean addResource(Resource rsrc)
 	{
 		if (resourceExists(rsrc.name))
 		{
@@ -49,7 +49,7 @@ public abstract class ResourceManager<T>
 		return true;
 	}
 
-	protected boolean removeResource(String name)
+	public boolean removeResource(String name)
 	{
 		if(!resourceExists(name))
 		{
@@ -59,7 +59,7 @@ public abstract class ResourceManager<T>
 		return true;
 	}
 
-	protected Resource getResource(String name)
+	public Resource getResource(String name)
 	{
 		if(!resourceExists(name))
 		{	

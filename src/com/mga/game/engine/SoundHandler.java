@@ -1,4 +1,4 @@
-package com.mga.game;
+package com.mga.game.engine;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.mga.logic.Config;
 
 /**
  * SoundHandler class for managing sound files.

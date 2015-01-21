@@ -1,10 +1,11 @@
-package com.mga.game;
+package com.mga.game.engine;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mga.logic.Config;
 
 public class SpriteHandler extends ContainerHandler<Sprite>
 {

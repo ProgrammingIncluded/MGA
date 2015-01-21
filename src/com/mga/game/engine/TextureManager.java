@@ -1,8 +1,9 @@
-package com.mga.game;
+package com.mga.game.engine;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.mga.logic.Config;
 
 public class TextureManager extends ResourceManager<Texture>
 {
