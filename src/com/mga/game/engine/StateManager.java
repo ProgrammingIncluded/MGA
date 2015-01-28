@@ -35,7 +35,6 @@ public class StateManager
 	{
 		if(!isQuit)
 		{
-			state.startUp(this);
 			states.addLast(state);
 		}
 	}
@@ -86,7 +85,7 @@ public class StateManager
 	{
 		if(states.size() != 0)
 		{
-			states.peekFirst().update(this);
+			states.getFirst().update(this);
 		}
 		exit();
 	}
@@ -98,7 +97,7 @@ public class StateManager
 	{
 		if(states.size() != 0)
 		{
-			states.peekFirst().pause(this);
+			states.getFirst().pause(this);
 		}
 		exit();
 	}
@@ -110,7 +109,7 @@ public class StateManager
 	{
 		if(states.size() != 0)
 		{
-			states.peekFirst().resume(this);
+			states.getFirst().resume(this);
 		}
 		exit();
 	}

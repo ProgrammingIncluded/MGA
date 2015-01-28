@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
 import com.mga.game.engine.StateManager;
 
@@ -30,6 +31,8 @@ public class TitleState extends State
 		texManager.removeResource("shouldword");
 		Sound snd = sndHandler.createSound("TestSound", "audio/stroll.wav");
 		snd.play();
+		GameObject.intialize();
+		new MiniCubeJr();
 	}
 
 	@Override
@@ -40,12 +43,13 @@ public class TitleState extends State
 		batch.begin();
 		img.draw(batch);
 		batch.end();
+		GameObject.draw();
 	}
 
 	@Override
 	public void update(StateManager stateM)
 	{
-		
+		GameObject.update(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override

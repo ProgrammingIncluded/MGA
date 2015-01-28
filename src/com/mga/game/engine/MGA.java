@@ -39,13 +39,16 @@ public class MGA extends ApplicationAdapter
 		texManager = new TextureManager();
 		sprHandler = new SpriteHandler(texManager.getErrorResource().resource);
 		sndHandler = new SoundHandler();
-		
+
+		//First state needs to be manually started, for now.
+		Config.DEF_STATE.startUp(stateManager);
 		stateManager.pushState(Config.DEF_STATE);
 	}
 
 	@Override
 	public void render() 
 	{
+		stateManager.update();
 		stateManager.draw();
 	}
 	

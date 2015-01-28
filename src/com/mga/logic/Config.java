@@ -15,5 +15,8 @@ public class Config
 	public static final String DEF_TEX_NAME = "ERRTEX";
 	public static final String DEF_TEX_FILE_NAME = "texture/ERRTEX.png";
 	
+	/* GO Related */
+	public static final String DEF_GO_NAME = "DEFGONAME";
+	
 	public static final State DEF_STATE = new TitleState();
 }
