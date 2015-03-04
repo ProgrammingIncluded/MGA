@@ -5,11 +5,12 @@ import com.mga.logic.Config;
 
 public class MGA extends ApplicationAdapter 
 {	
+	/*Manager and Handlers*/
 	private static StateManager stateManager;
 	private static TextureManager texManager;
 	private static SpriteHandler sprHandler;
 	private static SoundHandler sndHandler;
-
+	
 	/* Static Functions */
 	public static TextureManager getTextureManager()
 	{
@@ -29,6 +30,11 @@ public class MGA extends ApplicationAdapter
 	public static StateManager getStateManger()
 	{
 		return stateManager;
+	}
+	
+	public static Platform getPlatform()
+	{
+		return PLATFORM;
 	}
 	
 	@Override
