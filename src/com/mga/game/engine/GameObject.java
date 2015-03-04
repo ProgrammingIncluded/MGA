@@ -4,12 +4,15 @@ import java.util.LinkedHashMap;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.mga.logic.Config;
 
 /**
  *	An abstract class that deals with any classes involving in game
  * objects that will interact with each other. So, Sprite will be
- * assigned for each GameObject.  
+ * assigned for each GameObject. Once assigned, Sprite is deleted by GO
+ * automatically when GO is destroyed by calling ContainerHandler's
+ * deleteResource(). 
  */
 public abstract class GameObject
 {
@@ -23,6 +26,8 @@ public abstract class GameObject
 	static boolean isIntialized = false;
 
 	/*Local Variables*/
+	private boolean isVisible;
+	//private int uniqueID;
 	private String name;
 	private Sprite goSpr;
 
@@ -53,6 +58,7 @@ public abstract class GameObject
 			this.goSpr = MGA.getSpriteHandler().getDefContainer().containerObj;
 		}
 		GameObject.addGO(name, this);
+		isVisible = true;
 		sprHand = MGA.getSpriteHandler();
 		sndHand = MGA.getSoundHandler();
 	}
@@ -68,9 +74,12 @@ public abstract class GameObject
 	{
 		SpriteBatch batch = new SpriteBatch();
 		batch.begin();
+		Sprite dSpr = null;
 		for(GameObject go : goLHMap.values())
 		{
-			go.getSprite().draw(batch);
+			dSpr = go.goSpr;
+			if(go.isVisible == true && dSpr != null)
+				dSpr.draw(batch);
 		}
 		batch.end();
 	}
@@ -100,8 +109,9 @@ public abstract class GameObject
 	/// Remove a GameObject from the static tracker.
 	public static boolean removeGO(String name)
 	{
-		goLHMap.remove(name);
-		return false;
+		GameObject go = goLHMap.remove(name);
+		go.sprHand.deleteContainer(go.name); // TODO remove spritehandler and let GO handle sprite naming w/unique id.
+		return true;
 	}
 	
 	public static boolean intialize()
@@ -126,6 +136,11 @@ public abstract class GameObject
 		return goSpr;
 	}
 	
+	public boolean getVisible()
+	{
+		return isVisible;
+	}
+	
 	public SoundHandler getSoundHandler()
 	{
 		return sndHand;
@@ -137,6 +152,26 @@ public abstract class GameObject
 	}
 	
 	/* Setters */
+	/**
+	 * Short cut function for set position of Sprite. Sets the pos.
+	 * of GO.
+	 */
+	public boolean setPosition(Vector2 pos)
+	{
+		goSpr.setPosition(pos.x, pos.y);
+		return true;
+	}
+	
+	/**
+	 * Short cut function for set Position of Sprite. Sets the pos.
+	 * of GO.
+	 */
+	public boolean setPosition(float x, float y)
+	{
+		goSpr.setPosition(x,y);
+		return true;
+	}
+	
 	/**
 	 * Setter for name of GO. Returns false if name length is 0
 	 * or null string.
@@ -152,16 +187,24 @@ public abstract class GameObject
 	}
 	
 	/**
-	 * Set the sprite of the GameObject. If sprite is null,
-	 * returns false.
+	 * Set the sprite of the GameObject. Does not allow null Sprite,
+	 * returns false if so. Use setVisible for invisible GO.
 	 */
 	public boolean setSprite(Sprite spr)
 	{
 		if(spr == null)
-		{
 			return false;
-		}
 		this.goSpr = spr;
+		return true;
+	}
+	
+	/**
+	 * Setter for isVisible that determines whether or not the GO 
+	 * can be seen.
+	 */
+	public boolean setIsVisible(boolean isVisible)
+	{
+		this.isVisible = isVisible;
 		return true;
 	}
 }

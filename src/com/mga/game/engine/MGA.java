@@ -50,6 +50,10 @@ public class MGA extends ApplicationAdapter
 	public void render() 
 	{
 		stateManager.update();
+		
+		if(stateManager.isQuit == true)
+			System.exit(0);
+		
 		stateManager.draw();
 	}
 	

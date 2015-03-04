@@ -28,8 +28,10 @@ public class SpriteHandler extends ContainerHandler<Sprite>
 		texManager = null;
 	}
 	
-	/// Call when you delete a sprite or release it from member.
-	/// Will point all other sprites to a default sprite.
+	/**
+	 * Call when textures is released.
+	 * Will point all other Sprites with the resourceFileName to default sprite.
+	 */
 	@Override
 	public boolean resourceDeleted(String resourceFileName)
 	{

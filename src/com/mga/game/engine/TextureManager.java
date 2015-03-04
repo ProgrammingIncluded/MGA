@@ -21,7 +21,6 @@ public class TextureManager extends ResourceManager<Texture>
 		Texture defRsrcObj)
 	{
 		super(defRsrcName, defFileName, defRsrcObj);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Texture loadResource(String name, String fileName)
