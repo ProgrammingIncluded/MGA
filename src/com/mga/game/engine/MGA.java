@@ -32,11 +32,6 @@ public class MGA extends ApplicationAdapter
 		return stateManager;
 	}
 	
-	public static Platform getPlatform()
-	{
-		return PLATFORM;
-	}
-	
 	@Override
 	public void create() 
 	{
