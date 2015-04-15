@@ -15,7 +15,8 @@ public class Player extends GameObject implements Killable
 	
 	/* Private Variables */
 	private int hp, mp, str;
-
+	private int hpMax, mpMax, strMax;
+	
 	// Default Constructor.
 	Player()
 	{

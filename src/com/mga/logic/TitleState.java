@@ -10,10 +10,7 @@ import com.mga.game.engine.State;
 import com.mga.game.engine.StateManager;
 
 public class TitleState extends State
-{
-	SpriteBatch batch;
-	Sprite img;
-	
+{	
 	public TitleState()
 	{
 		super();
@@ -22,17 +19,12 @@ public class TitleState extends State
 	@Override
 	public void startUp(StateManager stateM)
 	{
-		batch = new SpriteBatch();
 		//img = new Texture("badlogic.jpg"); 
 		sprHandler.setTextureManager(texManager);
-		img = sprHandler.createSprite("testSprite", 
-			"shouldwork", "texture/badlogic.jpg");
-		sprHandler.resourceDeleted("texture/badlogic.jpg");
-		texManager.removeResource("shouldword");
 		Sound snd = sndHandler.createSound("TestSound", "audio/stroll.wav");
 		snd.play();
 		GameObject.intialize();
-		new MiniCubeJr();
+		new KittyCannon();
 	}
 
 	@Override
@@ -40,9 +32,6 @@ public class TitleState extends State
 	{
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		img.draw(batch);
-		batch.end();
 		GameObject.draw();
 	}
 
