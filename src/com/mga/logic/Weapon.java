@@ -29,7 +29,6 @@ public abstract class Weapon extends GameObject
 	/*Private Member Variables*/
 	private int weaponID; //!< Must be unique. Utilizes Weapon Count.
 	private int damage, fireRate, durability;
-	private String weaponName; //!< Does not need to be unique.
 	
 	// Default constructor.
 	Weapon()

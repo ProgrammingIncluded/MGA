@@ -10,6 +10,9 @@ public class KittyCannon extends Weapon
 	KittyCannon()
 	{
 		super(-1, 50, 1);
+		setName("KittyCannon");
+		this.setSprite(sprHand.createSprite("KittyCannon", "bunny",
+			"texture/Easter Assets/single/bunny/idle_1.png"));
 	}
 
 	/**
@@ -22,7 +25,7 @@ public class KittyCannon extends Weapon
 		Sprite spr = getSprite();
 		resultPos.x = spr.getX();
 		resultPos.y = spr.getY();
-		resultPos.add(direction.x*DEF_SPEED + DEF_DUR, direction.y*DEF_SPEED + DEF_DUR);
+		resultPos.add(direction.x*(DEF_SPEED * DEF_DUR * 0.01f), direction.y*(DEF_SPEED * DEF_DUR * 0.01f));
 		getSprite().setPosition(resultPos.x, resultPos.y);
     }
 
