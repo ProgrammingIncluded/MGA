@@ -16,11 +16,7 @@ import com.mga.logic.playfield.Cone;
 import com.mga.logic.playfield.ConeGenerator;
 
 public class TitleState extends State
-<<<<<<< HEAD
-{	
-=======
 {
->>>>>>> c0971885945fdeadd552dcfcd54a0dd3be4aa064
 	public TitleState()
 	{
 		super();
@@ -31,12 +27,6 @@ public class TitleState extends State
 	{
 		//img = new Texture("badlogic.jpg"); 
 		sprHandler.setTextureManager(texManager);
-<<<<<<< HEAD
-		Sound snd = sndHandler.createSound("TestSound", "audio/stroll.wav");
-		snd.play();
-		GameObject.intialize();
-		new KittyCannon();
-=======
 		/*
 		img = sprHandler.createSprite("testSprite", 
 			"shouldwork", "texture/badlogic.jpg");
@@ -50,7 +40,6 @@ public class TitleState extends State
 		new Abigail();
 		// Create the cones!
 		new ConeGenerator();
->>>>>>> c0971885945fdeadd552dcfcd54a0dd3be4aa064
 	}
 
 	@Override

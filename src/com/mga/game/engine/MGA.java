@@ -31,11 +31,7 @@ public class MGA extends ApplicationAdapter
 	{
 		return stateManager;
 	}
-	
-<<<<<<< HEAD
-	
-=======
->>>>>>> c0971885945fdeadd552dcfcd54a0dd3be4aa064
+
 	@Override
 	public void create() 
 	{
