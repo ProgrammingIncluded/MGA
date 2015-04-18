@@ -44,7 +44,6 @@ public class SpriteHandler extends ContainerHandler<Sprite>
 			cont.fileName = getDefContainer().fileName;
 			cont.containerObj.setTexture(
 				getDefContainer().containerObj.getTexture());
-			
 		}
 		return true;
 	}

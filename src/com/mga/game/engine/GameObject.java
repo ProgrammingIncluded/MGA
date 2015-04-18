@@ -17,8 +17,8 @@ import com.mga.logic.Config;
 public abstract class GameObject
 {
 	/* Variables from MGA */
-	private SpriteHandler sprHand;
-	private SoundHandler sndHand;
+	protected SpriteHandler sprHand;
+	protected SoundHandler sndHand;
 	
 	/*Static Variables*/
 	static String DEF_GO_NAME = Config.DEF_GO_NAME;
