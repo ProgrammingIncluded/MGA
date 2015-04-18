@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
+/**
+ * Class that should be derived for any container like management.
+ * Provides ability to auto point containers to default textures when
+ * "deleted" in case someone has a reference to that container.
+ * As such, resourceDeleted needs to be manually called.
+ * @author Charles Chen
+ */
 public abstract class ContainerHandler<T>
 {
 	/* Private Variables  */
@@ -17,9 +24,13 @@ public abstract class ContainerHandler<T>
 			defFileName, containerObj);
 	}
 	
-	/// Function to tell the Handler that a resource has been deleted.
-	/// Change all the container classes to point to a default
-	/// texture that is unchangable.
+	/**
+	 * Function to tell the Handler that a tex. resource has been deleted.
+	 * Change all the container classes to point to a default
+	 * texture that is unchangeable. Call when textures are deleted from memory
+	 * for some reason. TODO: Have manager call resource deleted
+	 * when an object is deleted.
+	 */
 	public abstract boolean resourceDeleted(String resourceFileName);
 	
 	/// Short hand function to check whether or not
@@ -59,17 +70,24 @@ public abstract class ContainerHandler<T>
 		return containers.get(containerName).containerObj;
 	}
 	
-	public boolean deleteContainer(String containerName)
+	/**
+	 * Removes the tracking of the given container's name.
+	 * Use with caution, once untracked, will not be able to
+	 * use resourceDeleted to set contain to a default value.
+	 * Call if you want to delete the sprite, but not the texture.
+	 */
+	public T deleteContainer(String containerName)
 	{
 		if (!containerExists(containerName))
 		{
-			return false;
+			return null;
 		}
-		containers.remove(containerName);
-		return true;
+		return containers.remove(containerName).containerObj;
 	}
 	
-	/// Get's the Container's associated with given resource filename.
+	/**
+	 * Get's the Container's associated with given resource filename.
+	 */
 	protected ArrayList<Container> 
 		getContainerAssocResource(String resourceFileName)
 	{
