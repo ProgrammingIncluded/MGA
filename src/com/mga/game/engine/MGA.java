@@ -2,6 +2,7 @@ package com.mga.game.engine;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.mga.logic.Config;
+import com.mga.logic.TitleState;
 
 public class MGA extends ApplicationAdapter 
 {	
@@ -35,6 +36,13 @@ public class MGA extends ApplicationAdapter
 	@Override
 	public void create() 
 	{
+		// Load default files. If not exist, leave.
+		if(!Config.loadConfigFile())
+		{
+			System.out.println("Unable to load default files. Exiting.");
+			System.exit(1);
+		}
+			
 		// Start managers.
 		stateManager = new StateManager();
 		texManager = new TextureManager();
@@ -42,8 +50,10 @@ public class MGA extends ApplicationAdapter
 		sndHandler = new SoundHandler();
 
 		//First state needs to be manually started, for now.
-		Config.DEF_STATE.startUp(stateManager);
-		stateManager.pushState(Config.DEF_STATE);
+		// Create default state.
+		TitleState state = new TitleState();
+		state.startUp(stateManager);
+		stateManager.pushState(state);
 	}
 
 	@Override

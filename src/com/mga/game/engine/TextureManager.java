@@ -9,7 +9,7 @@ public class TextureManager extends ResourceManager<Texture>
 {
 	/* Static Values */
 	static final String DEF_RSRC_NAME = Config.DEF_TEX_NAME;
-	static final String DEF_FILE_NAME = Config.DEF_TEX_FILE_NAME;
+	static final String DEF_FILE_NAME = Config.getERRTEX();
 	
 	public TextureManager()
 	{
