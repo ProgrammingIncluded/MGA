@@ -16,14 +16,14 @@ public class Abigail extends CollisionObject
 {
 	/* Local Variables */
 	boolean isDead = false;
-	Vector2 movSpeed = new Vector2(100f, 100f);
+	Vector2 movSpeed = new Vector2(200f, 200f);
 	
 	public Abigail()
 	{
 		super("Abigail");
 		Sprite spr = this.getSpriteHandler().createSprite(
 				this.getName(), "Abigail", "texture/Abigail/Abigail.png");
-		spr.setScale(3); // TODO: Add sprite scaling for all.
+		spr.setScale(0.5f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
 	}
 

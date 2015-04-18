@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Beta extends Enemy {
 	private float chargePeriod=0,frozenRadian,chargeTime;
+	///frozenRadian "freezes" beta into charging straight forward.
+	///chargePeriod and chargeTime just exist to keep the pattern?
+
 	public Beta(Sprite player, int vel, int health, String name) {
 		super(player, vel, health, name);
 		chargeTime=6;
@@ -16,7 +19,7 @@ public class Beta extends Enemy {
 	}
 
 	@Override
-	public void atk(float dTime) {
+	public void attackPattern(float dTime) {
 		// TODO Auto-generated method stub
 		
 		if(player == null){

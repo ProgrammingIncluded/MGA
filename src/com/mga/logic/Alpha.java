@@ -8,9 +8,11 @@ public class Alpha extends Enemy {
 		super(player, vel, health, name);
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * This is the overridden atk method for all my enemy versions
+	 */
 	@Override
-	public void atk(float dTime) {
+	public void attackPattern(float dTime) {
 		// TODO Auto-generated method stub
 		
 		if(player == null){

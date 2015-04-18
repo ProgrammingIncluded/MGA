@@ -27,10 +27,10 @@ public abstract class Enemy extends CollisionObject{
 
 	@Override
 	public void tick(float dTime) {
-		atk(dTime);
+		attackPattern(dTime);
 		
 	}
-	public abstract void atk(float dTime);
+	public abstract void attackPattern(float dTime);
 	
 
 }
