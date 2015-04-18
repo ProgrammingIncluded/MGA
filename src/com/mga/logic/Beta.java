@@ -7,22 +7,24 @@ public class Beta extends Enemy {
 	///frozenRadian "freezes" beta into charging straight forward.
 	///chargePeriod and chargeTime just exist to keep the pattern?
 
-	public Beta(Sprite player, int vel, int health, String name) {
+	public Beta(Sprite player, int vel, int health, String name) 
+	{
 		super(player, vel, health, name);
 		chargeTime=6;
-		// TODO Auto-generated constructor stub
 	}
-	public Beta(Sprite player, int vel, int health, String name, float ct) {
+	public Beta(Sprite player, int vel, int health, String name, float ct) 
+	{
 		super(player, vel, health, name);
 		chargeTime=ct;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void attackPattern(float dTime) {
+	public void attackPattern(float dTime) 
+	{
 		// TODO Auto-generated method stub
-		
-		if(player == null){
+
+		if(player == null)
+		{
 			removeGO("name");
 		}
 		// TODO Auto-generated method stub
@@ -39,11 +41,9 @@ public class Beta extends Enemy {
 				frozenRadian=(float)((theta+90)*Math.PI/180);
 			}
 			else{
-				getSprite().setPosition((float)(getSprite().getX()+dTime*vel*Math.cos(frozenRadian)),(float)(getSprite().getY()+ dTime*vel*Math.sin(frozenRadian)));
+				getSprite().setPosition((float)(getSprite().getX()+dTime*vel*Math.cos(frozenRadian)),
+					(float)(getSprite().getY()+ dTime*vel*Math.sin(frozenRadian)));
 			}
-			
-			
-			
 		}
 
 	}
