@@ -4,16 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.mga.game.engine.CollisionObject;
-import com.mga.game.engine.GameObject;
-import com.mga.game.engine.State;
-import com.mga.game.engine.StateManager;
+import com.mga.game.engine.*;
 import com.mga.logic.playfield.Abigail;
 import com.mga.logic.playfield.Cone;
-import com.mga.logic.playfield.ConeGenerator;
 
 public class TitleState extends State
 {
@@ -37,9 +30,12 @@ public class TitleState extends State
 		Sound snd = sndHandler.createSound("TestSound", "audio/title2.mp3");
 		snd.play();
 		GameObject.intialize();
-		new Abigail();
+		Abigail a=new Abigail();
 		// Create the cones!
-		new ConeGenerator();
+		//new ConeGenerator();
+		//new Alpha(a.getSprite(),50,1,"Alpha");
+		//new Alpha(a.getSprite(),800,1,"Alpha");
+		new Beta(a.getSprite(),400,1,"Beta",3);
 	}
 
 	@Override
