@@ -16,7 +16,7 @@ public abstract class Enemy extends CollisionObject{
 		this.getName(), "Abigail", "texture/Abigail/Abigail.png");
 		spr.setScale(0.25f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
-		setPosition(100,100);
+		setPosition(400,400);
 	}
 	
 	@Override

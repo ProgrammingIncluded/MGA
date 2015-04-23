@@ -15,7 +15,7 @@ import com.mga.game.engine.MGA;
 public class Abigail extends CollisionObject
 {
 	/* Local Variables */
-	boolean isDead = false;
+	public boolean isDead = false;
 	Vector2 movSpeed = new Vector2(200f, 200f);
 	
 	public Abigail()
@@ -65,6 +65,6 @@ public class Abigail extends CollisionObject
 	@Override
     public void collided(CollisionObject colObj)
     {
-	   System.out.println(this.getName() + " colliding with " + colObj.getName());
+	   die();
     }
 }

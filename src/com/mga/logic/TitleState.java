@@ -17,6 +17,7 @@ import com.mga.logic.playfield.ConeGenerator;
 
 public class TitleState extends State
 {
+	Abigail abig;
 	public TitleState()
 	{
 		super();
@@ -29,9 +30,19 @@ public class TitleState extends State
 		Sound snd = sndHandler.createSound("TestSound", "audio/title2.mp3");
 		snd.play();
 		GameObject.intialize();
-		Abigail abig = new Abigail();
-		new Alpha(abig.getSprite(), 25, 100, "Enemy");
-		new Beta(abig.getSprite(), 500, 100, "EnemyTwo", 2.f);
+		abig = new Abigail();
+		for(int x = 0; x < 500; ++x)
+		{
+			Beta b = 
+			new Beta(abig.getSprite(), 500, 100, "EnemyTwo"+Math.random(), 2.f);
+			b.getSprite().setX((float)Math.random()*1000 + 500);
+			b.getSprite().setY((float)Math.random()*1000 + 500);
+			Alpha a = new Alpha(abig.getSprite(), 150, 100, "Enemy" + Math.random());
+			a.getSprite().setX((float)Math.random()*1000 + 500);
+			a.getSprite().setY((float)Math.random()*1000 + 500);
+		}
+
+
 	}
 
 	@Override
@@ -49,6 +60,11 @@ public class TitleState extends State
 			stateM.exit();
 		if(Gdx.input.isKeyPressed(Input.Keys.O))
 			Cone.OVERLAP = !Cone.OVERLAP;
+		if(abig.isDead)
+		{
+			abig.getSprite().setPosition(0, 0);
+			abig.isDead = false;
+		}
 		// Order of call does not matter, but best for update col after GO.
 		GameObject.update(Gdx.graphics.getDeltaTime());
 		CollisionObject.updateCollision();
