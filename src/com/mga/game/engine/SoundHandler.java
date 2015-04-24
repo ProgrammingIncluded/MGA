@@ -18,7 +18,7 @@ import com.mga.logic.Config;
 public class SoundHandler extends ContainerHandler<Sound>
 {
 	static final String DEF_CONT_NAME = Config.DEF_SND_NAME;
-	static final String DEF_FILE_NAME = Config.DEF_SND_FILE_NAME;
+	static final String DEF_FILE_NAME = Config.getERRSND();
 	
 	SoundHandler()
 	{

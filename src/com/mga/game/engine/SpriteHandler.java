@@ -11,7 +11,7 @@ public class SpriteHandler extends ContainerHandler<Sprite>
 {
 	/* Constant Variables */
 	static final String DEF_CONT_NAME = Config.DEF_SPR_NAME;
-	static final String DEF_FILE_NAME = Config.DEF_TEX_FILE_NAME;
+	static final String DEF_FILE_NAME = Config.getERRTEX();
 	
 	/* Private */
 	private TextureManager texManager; // No need to delete... 
