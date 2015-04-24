@@ -11,11 +11,21 @@ public class Beta extends Enemy {
 	{
 		super(player, vel, health, name);
 		chargeTime=6;
+		Sprite spr = this.getSpriteHandler().createSprite(
+				this.getName(), "Enemy2", "texture/enemy2.png");
+		spr.setScale(0.1f); // TODO: Add sprite scaling for all.
+		this.setSprite(spr);
+		setPosition(400,400);
 	}
 	public Beta(Sprite player, int vel, int health, String name, float ct) 
 	{
 		super(player, vel, health, name);
 		chargeTime=ct;
+		Sprite spr = this.getSpriteHandler().createSprite(
+				this.getName(), "Enemy2", "texture/enemy2.png");
+		spr.setScale(0.1f); // TODO: Add sprite scaling for all.
+		this.setSprite(spr);
+		setPosition(400,400);
 	}
 
 	@Override

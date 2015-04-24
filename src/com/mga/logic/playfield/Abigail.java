@@ -22,7 +22,7 @@ public class Abigail extends CollisionObject
 	{
 		super("Abigail");
 		Sprite spr = this.getSpriteHandler().createSprite(
-				this.getName(), "Abigail", "texture/Abigail/Abigail.png");
+				this.getName(), "Abigail", "texture/Pac/dot.png");
 		spr.setScale(0.5f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
 	}

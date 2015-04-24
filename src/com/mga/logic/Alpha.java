@@ -8,6 +8,11 @@ public class Alpha extends Enemy
 	public Alpha(Sprite player, int vel, int health, String name) 
 	{
 		super(player, vel, health, name);
+		Sprite spr = this.getSpriteHandler().createSprite(
+				this.getName(), "Enemy", "texture/enemy.png");
+		spr.setScale(0.25f); // TODO: Add sprite scaling for all.
+		this.setSprite(spr);
+		setPosition(400,400);
 	}
 	/**
 	 * This is the overridden atk method for all my enemy versions

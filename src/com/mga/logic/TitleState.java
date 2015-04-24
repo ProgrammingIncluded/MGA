@@ -18,6 +18,7 @@ import com.mga.logic.playfield.ConeGenerator;
 public class TitleState extends State
 {
 	Abigail abig;
+	Sprite background;
 	public TitleState()
 	{
 		super();
@@ -30,6 +31,10 @@ public class TitleState extends State
 		Sound snd = sndHandler.createSound("TestSound", "audio/title2.mp3");
 		snd.play();
 		GameObject.intialize();
+		
+		background = sprHandler.createSprite("Air", "Air", "texture/dawn1.png");
+		background.setScale(12f,10f);
+		
 		abig = new Abigail();
 		for(int x = 0; x < 500; ++x)
 		{
@@ -50,6 +55,10 @@ public class TitleState extends State
 	{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		SpriteBatch batch = new SpriteBatch();
+		batch.begin();
+		background.draw(batch);
+		batch.end();
 		GameObject.draw();
 	}
 
