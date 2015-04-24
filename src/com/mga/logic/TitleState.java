@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
@@ -14,6 +16,8 @@ import com.mga.logic.playfield.ConeGenerator;
 
 public class TitleState extends State
 {
+	Abigail abig;
+	Sprite background;
 	public TitleState()
 	{
 		super();
@@ -22,21 +26,26 @@ public class TitleState extends State
 	@Override
 	public void startUp(StateManager stateM)
 	{
-		//img = new Texture("badlogic.jpg"); 
 		sprHandler.setTextureManager(texManager);
-		/*
-		img = sprHandler.createSprite("testSprite", 
-			"shouldwork", "texture/badlogic.jpg");
-		// Function order to call when deleting resources.
-		sprHandler.resourceDeleted("texture/badlogic.jpg");
-		texManager.removeResource("shouldword");
-		*/
 		Sound snd = sndHandler.createSound("TestSound", "audio/title2.mp3");
 		snd.play();
 		GameObject.intialize();
-		new Abigail();
-		// Create the cones!
-		new ConeGenerator();
+		
+		background = sprHandler.createSprite("Air", "Air", "texture/dawn1.png");
+		background.setScale(12f,10f);
+		
+		abig = new Abigail();
+		for(int x = 0; x < 500; ++x)
+		{
+			Beta b = 
+			new Beta(abig.getSprite(), 500, 100, "EnemyTwo"+Math.random(), 2.f);
+			b.getSprite().setX((float)Math.random()*1000 + 500);
+			b.getSprite().setY((float)Math.random()*1000 + 500);
+			Alpha a = new Alpha(abig.getSprite(), 150, 100, "Enemy" + Math.random());
+			a.getSprite().setX((float)Math.random()*1000 + 500);
+			a.getSprite().setY((float)Math.random()*1000 + 500);
+		}
+
 	}
 
 	@Override
@@ -44,6 +53,10 @@ public class TitleState extends State
 	{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		SpriteBatch batch = new SpriteBatch();
+		batch.begin();
+		background.draw(batch);
+		batch.end();
 		GameObject.draw();
 	}
 
@@ -54,6 +67,11 @@ public class TitleState extends State
 			stateM.exit();
 		if(Gdx.input.isKeyPressed(Input.Keys.O))
 			Cone.OVERLAP = !Cone.OVERLAP;
+		if(abig.isDead)
+		{
+			abig.getSprite().setPosition(0, 0);
+			abig.isDead = false;
+		}
 		// Order of call does not matter, but best for update col after GO.
 		GameObject.update(Gdx.graphics.getDeltaTime());
 		CollisionObject.updateCollision();

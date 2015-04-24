@@ -15,14 +15,14 @@ import com.mga.game.engine.MGA;
 public class Abigail extends CollisionObject
 {
 	/* Local Variables */
-	boolean isDead = false;
+	public boolean isDead = false;
 	Vector2 movSpeed = new Vector2(200f, 200f);
 	
 	public Abigail()
 	{
 		super("Abigail");
 		Sprite spr = this.getSpriteHandler().createSprite(
-				this.getName(), "Abigail", "texture/Abigail/Abigail.png");
+				this.getName(), "Abigail", "texture/Pac/dot.png");
 		spr.setScale(0.5f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
 	}
@@ -65,6 +65,6 @@ public class Abigail extends CollisionObject
 	@Override
     public void collided(CollisionObject colObj)
     {
-	   System.out.println(this.getName() + " colliding with " + colObj.getName());
+	   die();
     }
 }
