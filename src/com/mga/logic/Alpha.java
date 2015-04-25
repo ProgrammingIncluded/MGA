@@ -22,22 +22,22 @@ public class Alpha extends Enemy
 	{
 		// TODO Auto-generated method stub
 		
-		if(player == null)
+		if(getPlayer() == null)
 		{
 			removeGO("name");
 		}
 		// TODO Auto-generated method stub
 		else
 		{
-			float dx=player.getX()-getSprite().getX();
-			float dy=player.getY()-getSprite().getY();
+			float dx=getPlayer().getX()-getSprite().getX();
+			float dy=getPlayer().getY()-getSprite().getY();
 			float theta=(float)(180.0/Math.PI*Math.atan(dy/dx)-90.0);
 			if(dx<0){
 				theta+=180.0;
 			}
 			getSprite().setRotation(theta);
-			getSprite().setPosition((float)(getSprite().getX()+dTime*vel*dx/Math.sqrt(dx*dx+dy*dy)),
-				(float)(getSprite().getY()+ dTime*vel*dy/Math.sqrt(dx*dx+dy*dy)));
+			getSprite().setPosition((float)(getSprite().getX()+dTime*getVel()*dx/Math.sqrt(dx*dx+dy*dy)),
+				(float)(getSprite().getY()+ dTime*getVel()*dy/Math.sqrt(dx*dx+dy*dy)));
 		}
 
 	}

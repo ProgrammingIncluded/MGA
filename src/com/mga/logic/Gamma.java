@@ -36,12 +36,13 @@ public class Gamma extends Beta {
 			if(dx<0){
 				theta+=180.0;
 			}
-			if(chargePeriod%chargeTime<=1.0*chargeTime/50.0){
+			if(chargePeriod%chargeTime<=1.0*chargeTime/24.0){
 				getSprite().setRotation(theta);
 				frozenRadian=(float)((theta+90)*Math.PI/180);
 			}
 			else{
-				double deviation=Math.random()*20-10;
+				//double deviation=Math.random()*20-10;
+				double deviation=0;
 				getSprite().setPosition((float)(getSprite().getX()+dTime*vel*Math.cos(frozenRadian+deviation)),
 					(float)(getSprite().getY()+ dTime*vel*Math.sin(frozenRadian+deviation)));
 				
