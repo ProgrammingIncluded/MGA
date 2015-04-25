@@ -2,20 +2,24 @@ package com.mga.logic;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class Beta extends Enemy {
-	private float chargePeriod=0,frozenRadian,chargeTime;
+public class Beta extends Enemy
+{
+	public float chargePeriod=0,frozenRadian,chargeTime;
 	///frozenRadian "freezes" beta into charging straight forward.
 	///chargePeriod and chargeTime just exist to keep the pattern?
-
+	public Beta(){
+		super(null,500,1,""+Math.random());
+	}
 	public Beta(Sprite player, int vel, int health, String name) 
 	{
 		super(player, vel, health, name);
 		chargeTime=6;
 		Sprite spr = this.getSpriteHandler().createSprite(
-				this.getName(), "Enemy2", "texture/enemy2.png");
+			this.getName(), "Enemy2", "texture/enemy2.png");
 		spr.setScale(0.1f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
 		setPosition(400,400);
+		
 	}
 	public Beta(Sprite player, int vel, int health, String name, float ct) 
 	{
@@ -53,7 +57,11 @@ public class Beta extends Enemy {
 			else{
 				getSprite().setPosition((float)(getSprite().getX()+dTime*vel*Math.cos(frozenRadian)),
 					(float)(getSprite().getY()+ dTime*vel*Math.sin(frozenRadian)));
+				//new Beta ();
+				//new Bullet(getSpriteHandler().createSprite(
+						//this.getName(), "Abigail", "texture/Pac/dot.png"),1000,1,"Bullet"+Math.random(),frozenRadian);
 			}
+			
 		}
 
 	}

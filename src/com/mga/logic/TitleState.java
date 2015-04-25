@@ -35,7 +35,7 @@ public class TitleState extends State
 		background.setScale(12f,10f);
 		
 		abig = new Abigail();
-		for(int x = 0; x < 500; ++x)
+		for(int x = 0; x < 1; ++x)
 		{
 			Beta b = 
 			new Beta(abig.getSprite(), 500, 100, "EnemyTwo"+Math.random(), 2.f);
@@ -44,6 +44,9 @@ public class TitleState extends State
 			Alpha a = new Alpha(abig.getSprite(), 150, 100, "Enemy" + Math.random());
 			a.getSprite().setX((float)Math.random()*1000 + 500);
 			a.getSprite().setY((float)Math.random()*1000 + 500);
+			Gamma g = new Gamma(abig.getSprite(), 150, 100, "EnemyThree" + Math.random());
+			g.getSprite().setX((float)Math.random()*1000 + 500);
+			g.getSprite().setY((float)Math.random()*1000 + 500);
 		}
 
 	}
@@ -69,7 +72,7 @@ public class TitleState extends State
 			Cone.OVERLAP = !Cone.OVERLAP;
 		if(abig.isDead)
 		{
-			abig.getSprite().setPosition(0, 0);
+			abig.getSprite().setPosition((float)(Math.random()*500), (float)(Math.random()*500));
 			abig.isDead = false;
 		}
 		// Order of call does not matter, but best for update col after GO.
