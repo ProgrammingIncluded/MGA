@@ -1,6 +1,9 @@
 package com.mga.game.engine;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+
+import javafx.util.Pair;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,8 +26,12 @@ public abstract class GameObject
 	/*Static Variables*/
 	static String DEF_GO_NAME = Config.DEF_GO_NAME;
 	static LinkedHashMap<String, GameObject> goLHMap;
+	// Queue area for new GO while updating GOs.
+	static ArrayList<Pair<String, GameObject>>goObjectAdd;
 	static boolean isIntialized = false;
-
+	// Var to hold current updates on goLHMap
+	private static boolean updatingContainer = false;
+	
 	/*Local Variables*/
 	private boolean isVisible;
 	//private int uniqueID;
@@ -75,12 +82,14 @@ public abstract class GameObject
 		SpriteBatch batch = new SpriteBatch();
 		batch.begin();
 		Sprite dSpr = null;
+		updatingContainer = true;
 		for(GameObject go : goLHMap.values())
 		{
 			dSpr = go.goSpr;
 			if(go.isVisible == true && dSpr != null)
 				dSpr.draw(batch);
 		}
+		updatingContainer = false;
 		batch.end();
 	}
 	
@@ -88,21 +97,32 @@ public abstract class GameObject
 	/// Function to update each individual GameOjbect per frame
 	public static boolean update(float dTime)
 	{
+		if(!goObjectAdd.isEmpty())
+		{
+			for(Pair value : goObjectAdd)
+				goLHMap.put((String)value.getKey(), (GameObject)value.getValue());
+			goObjectAdd.clear();
+		}
+		updatingContainer = true;
 		for(GameObject go : goLHMap.values())
 		{
 			go.tick(dTime);
 		}
+		updatingContainer = false;
 		return true;
 	}
 
 	/// Add a GameObject to the static tracker.
-	public static boolean addGO(String name, GameObject gameObject)
+	public static boolean addGO(String id, GameObject gameObject)
 	{
-		if(goLHMap.containsKey(name))
+		if(goLHMap.containsKey(id))
 		{
 			return false; // Object already exists, return false.
 		}
-		goLHMap.put(name, gameObject);
+		if(updatingContainer == true)
+			goObjectAdd.add(new Pair<String, GameObject>(id,gameObject));
+		else
+			goLHMap.put(id, gameObject);
 		return false;
 	}
 
@@ -119,6 +139,7 @@ public abstract class GameObject
 		if(isIntialized == false)
 		{
 			goLHMap = new LinkedHashMap<String, GameObject>();
+			goObjectAdd = new ArrayList<Pair<String, GameObject>>();
 			return true;
 		}
 		return false;
