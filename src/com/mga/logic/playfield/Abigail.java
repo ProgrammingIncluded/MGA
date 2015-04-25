@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Scaling;
 import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.MGA;
+import com.mga.logic.Bullet;
 
 /**
  * Test class for GameObject.
@@ -16,7 +17,7 @@ public class Abigail extends CollisionObject
 {
 	/* Local Variables */
 	public boolean isDead = false;
-	Vector2 movSpeed = new Vector2(200f, 200f);
+	Vector2 movSpeed = new Vector2(400f, 400f);
 	
 	public Abigail()
 	{
@@ -53,6 +54,11 @@ public class Abigail extends CollisionObject
 		if(Gdx.input.isKeyPressed(Input.Keys.S))
 		{
 			moveVect.add(0, -movSpeed.y * dTime);
+		}
+		if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+		{
+			Bullet b =new Bullet(getSprite(),1000,1,"Bullet"+Math.random(),(float)(Math.PI/2));
+			b.setPosition(b.getSprite().getX(), b.getSprite().getY()+100);
 		}
 
 		miniCube.setPosition(moveVect.x, moveVect.y);

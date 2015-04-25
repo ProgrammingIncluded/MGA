@@ -37,16 +37,12 @@ public class TitleState extends State
 		abig = new Abigail();
 		for(int x = 0; x < 1; ++x)
 		{
-			Beta b = 
-			new Beta(abig.getSprite(), 500, 100, "EnemyTwo"+Math.random(), 2.f);
-			b.getSprite().setX((float)Math.random()*1000 + 500);
-			b.getSprite().setY((float)Math.random()*1000 + 500);
-			/*Alpha a = new Alpha(abig.getSprite(), 150, 100, "Enemy" + Math.random());
-			a.getSprite().setX((float)Math.random()*1000 + 500);
-			a.getSprite().setY((float)Math.random()*1000 + 500);
-			Gamma g = new Gamma(abig.getSprite(), 1000, 100, "EnemyThree" + Math.random(),1.f);
-			g.getSprite().setX((float)Math.random()*1000 + 500);
-			g.getSprite().setY((float)Math.random()*1000 + 500);*/
+			
+			//new Beta(abig.getSprite(), 500, 100, "Beta"+Math.random(), 0.5f,1f/24f,(float)(Math.PI/6));
+			new Beta(abig.getSprite(), 1000, 100, "Beta"+Math.random());
+			//new Alpha(abig.getSprite(), 150, 100, "Alpha" + Math.random());
+			//new Gamma(abig.getSprite(), 50, 100, "Gamma" + Math.random());
+			
 		}
 
 	}
