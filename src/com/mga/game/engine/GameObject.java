@@ -16,6 +16,12 @@ import com.mga.logic.Config;
  * assigned for each GameObject. Once assigned, Sprite is deleted by GO
  * automatically when GO is destroyed by calling ContainerHandler's
  * deleteResource(). 
+ * 
+ * There could be a lot of optimizations, but again, due to the scope
+ * and simplicity of the project, this is the current state of the class.
+ * 
+ * For more interest, we could optimize or efficient reuse of GO or allocations.
+ * 
  */
 public abstract class GameObject
 {
@@ -28,6 +34,8 @@ public abstract class GameObject
 	static LinkedHashMap<String, GameObject> goLHMap;
 	// Queue area for new GO while updating GOs.
 	static ArrayList<Pair<String, GameObject>>goObjectAdd;
+	// Garbage collection to remove the GO which were deleted in update pass.
+	static ArrayList<String>garbage;
 	static boolean isIntialized = false;
 	// Var to hold current updates on goLHMap
 	private static boolean updatingContainer = false;
@@ -94,15 +102,25 @@ public abstract class GameObject
 	}
 	
 	/*Static Functions*/
-	/// Function to update each individual GameOjbect per frame
+	/**
+	 * Function to update each individual GameOjbect per frame.
+	 * Also deletes and adds any new GO missed in update cycle.
+	 */
 	public static boolean update(float dTime)
 	{
+		if(!garbage.isEmpty())
+		{
+			for(String value : garbage)
+				removeGO(value);
+			garbage.clear();
+		}
 		if(!goObjectAdd.isEmpty())
 		{
-			for(Pair value : goObjectAdd)
-				goLHMap.put((String)value.getKey(), (GameObject)value.getValue());
+			for(Pair<String, GameObject> value : goObjectAdd)
+				goLHMap.put(value.getKey(), value.getValue());
 			goObjectAdd.clear();
 		}
+		
 		updatingContainer = true;
 		for(GameObject go : goLHMap.values())
 		{
@@ -112,7 +130,9 @@ public abstract class GameObject
 		return true;
 	}
 
-	/// Add a GameObject to the static tracker.
+	/**
+	 * Add a GameObject to the static tracker.
+	 */
 	public static boolean addGO(String id, GameObject gameObject)
 	{
 		if(goLHMap.containsKey(id))
@@ -126,11 +146,24 @@ public abstract class GameObject
 		return false;
 	}
 
-	/// Remove a GameObject from the static tracker.
+	/**
+	 *  Remove a GameObject from the static tracker. i.e. delete the game object.
+	 */
 	public static boolean removeGO(String name)
 	{
-		GameObject go = goLHMap.remove(name);
-		go.sprHand.deleteContainer(go.name); // TODO remove spritehandler and let GO handle sprite naming w/unique id.
+		if(name == null || !goLHMap.containsKey(name))
+			return false;
+		
+		if(updatingContainer == true)
+		{
+			garbage.add(name);
+		}
+		else
+		{
+			GameObject go = goLHMap.remove(name);
+			go.sprHand.deleteContainer(go.name); // TODO remove spritehandler and let GO handle sprite naming w/unique id.			
+		}
+
 		return true;
 	}
 	
@@ -140,6 +173,7 @@ public abstract class GameObject
 		{
 			goLHMap = new LinkedHashMap<String, GameObject>();
 			goObjectAdd = new ArrayList<Pair<String, GameObject>>();
+			garbage = new ArrayList<String>();
 			return true;
 		}
 		return false;
