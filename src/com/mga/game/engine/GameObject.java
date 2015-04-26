@@ -30,13 +30,13 @@ public abstract class GameObject
 	protected SoundHandler sndHand;
 	
 	/*Static Variables*/
-	static String DEF_GO_NAME = Config.DEF_GO_NAME;
-	static LinkedHashMap<String, GameObject> goLHMap;
+	public static String DEF_GO_NAME = Config.DEF_GO_NAME;
+	private static LinkedHashMap<String, GameObject> goLHMap;
 	// Queue area for new GO while updating GOs.
-	static ArrayList<Pair<String, GameObject>>goObjectAdd;
+	private static ArrayList<Pair<String, GameObject>>goObjectAdd;
 	// Garbage collection to remove the GO which were deleted in update pass.
-	static ArrayList<String>garbage;
-	static boolean isIntialized = false;
+	private static ArrayList<String>garbage;
+	private static boolean isIntialized = false;
 	// Var to hold current updates on goLHMap
 	private static boolean updatingContainer = false;
 	
@@ -129,7 +129,12 @@ public abstract class GameObject
 		updatingContainer = false;
 		return true;
 	}
-
+	
+	public static GameObject getGO(String id)
+	{
+		return goLHMap.get(id);
+	}
+	
 	/**
 	 * Add a GameObject to the static tracker.
 	 */
@@ -149,22 +154,33 @@ public abstract class GameObject
 	/**
 	 *  Remove a GameObject from the static tracker. i.e. delete the game object.
 	 */
-	public static boolean removeGO(String name)
+	public static GameObject removeGO(String name)
 	{
-		if(name == null || !goLHMap.containsKey(name))
-			return false;
+		if(name == null)
+			return null;
 		
+		GameObject go = null;
 		if(updatingContainer == true)
 		{
 			garbage.add(name);
 		}
 		else
 		{
-			GameObject go = goLHMap.remove(name);
+			go = goLHMap.remove(name);
+			if(go == null)
+				return null;
 			go.sprHand.deleteContainer(go.name); // TODO remove spritehandler and let GO handle sprite naming w/unique id.			
 		}
 
-		return true;
+		return go;
+	}
+	
+	/**
+	 * Deletes the GameObject from static tracker with GO object.
+	 */
+	public static GameObject removeGO(GameObject go)
+	{
+		return removeGO(go.getName());
 	}
 	
 	public static boolean intialize()
