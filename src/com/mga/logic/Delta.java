@@ -18,7 +18,7 @@ public class Delta extends Enemy {
 		safeDistance=sd;
 	}
 	public Delta(Sprite player, int vel, int health, String name) {
-		this(player,vel,health,name,(float)(Math.PI/4),100);
+		this(player,vel,health,name,(float)(Math.PI/4),200);
 	}
 	public Delta(){
 		this(null,200,1,"Delta"+Math.random());
@@ -56,7 +56,7 @@ public class Delta extends Enemy {
 					(float) (getSprite().getY() + dTime * getVel()
 							* Math.sin(Math.PI*3.0/2.0)));
 		}
-		//moveBackUp();
+		moveBackUp();
 
 	}
 	/**

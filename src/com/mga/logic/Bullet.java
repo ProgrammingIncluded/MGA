@@ -40,13 +40,13 @@ public class Bullet extends Enemy {
 		}
 
 		else {
-			// removeGO(getName());
+			 //removeGO(getName());
 		}
 	}
 
 	@Override
 	public void collided(CollisionObject colObj) {
-		// removeGO(getName());
+		//removeGO(getName());
 	}
 
 }
