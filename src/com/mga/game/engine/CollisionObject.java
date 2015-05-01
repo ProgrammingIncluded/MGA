@@ -1,7 +1,6 @@
 package com.mga.game.engine;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,12 +15,17 @@ import com.badlogic.gdx.math.Rectangle;
 public abstract class CollisionObject extends GameObject
 {
 	/*Class Constants*/
-	static final String DEF_COL_NAME = DEF_GO_NAME;
+	public static final String DEF_COL_NAME = DEF_GO_NAME;
 	
 	/*Static Variables*/
 	// List of InteractObject(s) for collision calculations.
-	public static ArrayList<CollisionObject>colObjects
+	protected static ArrayList<CollisionObject>colObjects
 		= new ArrayList<CollisionObject>();
+	// Var to keep internally track of collidable objects that need 
+	// to be destroyed.
+	private static ArrayList<CollisionObject> garbage = new ArrayList<CollisionObject>();
+	
+	private static boolean updatingCollision = false;
 	
 	/*Member Variables*/
 	// Variable to hold whether or not the collision is turn on.
@@ -75,6 +79,17 @@ public abstract class CollisionObject extends GameObject
 	public static void updateCollision()
 	{
 		CollisionObject colOne = null, colTwo = null;
+		/*Collects Garbage*/
+		if(garbage.size() > 0)
+		{
+			for(CollisionObject obj : garbage)
+				colObjects.remove(obj);
+			garbage.clear();
+		}
+
+		
+			
+		updatingCollision = true;
 		for(int i = 0; i != colObjects.size(); ++i)
 		{
 			colOne = colObjects.get(i);
@@ -98,19 +113,30 @@ public abstract class CollisionObject extends GameObject
 				}
 			}
 		}
+		updatingCollision = false;
 	}
 	
 	/**
 	 * Removes the CollisionObject from being tracked.
 	 * Right now, slightly inefficient, uses ArrayList searching...
-	 * Perhaps Tree?
+	 * Perhaps Tree? Kind of ugly coding.
 	 */
-	public static boolean removeGO(String name)
+	public static GameObject removeGO(String name)
 	{
-		GameObject go = goLHMap.remove(name);
-		if(!colObjects.remove(go))
-			System.out.println("nope");
-		return true;
+		GameObject result = GameObject.removeGO(name);
+		if(result == null || !(result instanceof CollisionObject))
+			return null;
+		
+		if(updatingCollision == true)
+		{
+			CollisionObject col = (CollisionObject) result;
+			garbage.add(col); // A way to make this less ugly?
+		}
+		else
+		{
+			colObjects.remove(result);
+		}
+		return result;
 	}
 	
 	/*Getters*/
