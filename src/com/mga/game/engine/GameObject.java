@@ -265,9 +265,9 @@ public abstract class GameObject
 	{
 		if(spr == null)
 			return false;
-		spr.setCenter(spr.getWidth()/2, spr.getHeight()/2);
+		spr.setOriginCenter();
 		this.goSpr = spr;
-		return true;
+		return true; 
 	}
 	
 	/**
