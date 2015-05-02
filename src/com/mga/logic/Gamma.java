@@ -67,7 +67,7 @@ public class Gamma extends Enemy {
 				theta += 180.0;
 			}
 			getSprite().setRotation(theta);
-			getSprite().setPosition(
+			setPosition(
 					(float) (getSprite().getX() + dTime * velX),
 					(float) (getSprite().getY() + dTime * velY));
 			velX+=(float)(dTime*acceleration* dx / Math.sqrt(dx * dx + dy * dy));

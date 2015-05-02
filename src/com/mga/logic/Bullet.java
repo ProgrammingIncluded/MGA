@@ -17,8 +17,7 @@ public class Bullet extends Enemy {
 		frozenRadian = fr;
 		this.setSprite(this.sprHand.createSprite(this.getName(), "Abigail",
 				"texture/Pac/dot.png"));
-		getSprite().setPosition(player.getX(),player.getY());
-		getSprite().setScale(0.05f);
+		setPosition(player.getX(),player.getY());
 		// player here actually is currently the Enemy.
 		// Well, bullet isn't supposed to extend Enemy anyhow.
 		timeLimit = 0;
@@ -32,7 +31,7 @@ public class Bullet extends Enemy {
 		// TODO Auto-generated method stub
 		timeLimit += dTime;
 		if (timeLimit < 5) {
-			getSprite().setPosition(
+			setPosition(
 					(float) (getSprite().getX() + dTime * getVel()
 							* Math.cos(frozenRadian)),
 					(float) (getSprite().getY() + dTime * getVel()
@@ -40,13 +39,14 @@ public class Bullet extends Enemy {
 		}
 
 		else {
-			 //removeGO(getName());
+			setHealth(0);
 		}
 	}
 
 	@Override
 	public void collided(CollisionObject colObj) {
-		//removeGO(getName());
+		if(colObj.getName().equals("Abigail"))
+			setHealth(0);
 	}
 
 }

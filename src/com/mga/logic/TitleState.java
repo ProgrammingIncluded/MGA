@@ -12,7 +12,6 @@ import com.mga.game.engine.State;
 import com.mga.game.engine.StateManager;
 import com.mga.logic.playfield.Abigail;
 import com.mga.logic.playfield.Cone;
-import com.mga.logic.playfield.ConeGenerator;
 
 public class TitleState extends State
 {
@@ -35,14 +34,15 @@ public class TitleState extends State
 		background.setScale(12f,10f);
 		
 		abig = new Abigail();
-		for(int x = 0; x < 10; ++x)
+		for(int x = 0; x < 1; ++x)
 		{
 			
 			//new Beta(abig.getSprite(), 500, 100, "Beta"+Math.random(), 0.5f,1f/24f,(float)(Math.PI/6));
 			//new Beta(abig.getSprite(), 1000, 100, "Beta"+Math.random());
 			//new Alpha(abig.getSprite(), 150, 100, "Alpha" + Math.random());
 			//new Gamma(abig.getSprite(), 50, 100, "Gamma" + Math.random());
-			new Delta(abig.getSprite(), 300, 200, "Delta"+Math.random());
+			//new Delta(abig.getSprite(), 300, 200, "Delta"+Math.random());
+			new EnemySpawner(abig.getSprite());
 			
 			
 			

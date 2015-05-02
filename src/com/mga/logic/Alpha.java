@@ -11,7 +11,7 @@ public class Alpha extends Enemy {
 		super(player, vel, health, name);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Alpha", "texture/enemy.png");
-		spr.setScale(0.2f); // TODO: Add sprite scaling for all.
+
 		this.setSprite(spr);
 		getSprite().setX((float) Math.random() * 1000 + 500);
 		getSprite().setY((float) Math.random() * 1000 + 500);
@@ -39,7 +39,7 @@ public class Alpha extends Enemy {
 				theta += 180.0;
 			}
 			getSprite().setRotation(theta);
-			getSprite().setPosition(
+			setPosition(
 					(float) (getSprite().getX() + dTime * getVel() * dx
 							/ Math.sqrt(dx * dx + dy * dy)),
 					(float) (getSprite().getY() + dTime * getVel() * dy

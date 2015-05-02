@@ -3,7 +3,7 @@ package com.mga.logic;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.game.engine.CollisionObject;
 
-public abstract class Enemy extends CollisionObject{
+public abstract class Enemy extends CollisionObject implements Killable{
 	protected int health,vel;
 	protected Sprite player;
 	
@@ -51,5 +51,15 @@ public abstract class Enemy extends CollisionObject{
 	}
 	public abstract void attackPattern(float dTime);
 	
-
+	public boolean kill(){
+		setHealth(0);
+		return true;
+	}
+	public boolean isDead(){
+		boolean ret=false;
+		if(getHealth()<=0){
+			ret=true;
+		}
+		return ret;
+	}
 }

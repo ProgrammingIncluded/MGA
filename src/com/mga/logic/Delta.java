@@ -10,7 +10,6 @@ public class Delta extends Enemy {
 		super(player, vel, health, name);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Delta", "texture/enemy.png");
-		spr.setScale(0.2f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
 		getSprite().setX((float) Math.random() * 300);
 		getSprite().setY((float) Math.random() * 300 + 300);
@@ -34,7 +33,7 @@ public class Delta extends Enemy {
 		float dx = getPlayer().getX() - getSprite().getX();
 		if(dx>=0&&dx<safeDistance){
 			getSprite().setRotation((float)((Math.PI-frozenRadian)/Math.PI*180.0));
-			getSprite().setPosition(
+			setPosition(
 					(float) (getSprite().getX() + dTime * getVel()
 							* Math.cos(Math.PI*3.0/2.0-frozenRadian)),
 					(float) (getSprite().getY() + dTime * getVel()
@@ -42,7 +41,7 @@ public class Delta extends Enemy {
 		}
 		else if(dx<0&&dx>-safeDistance){
 			getSprite().setRotation((float)((Math.PI+frozenRadian)/Math.PI*180.0));
-			getSprite().setPosition(
+			setPosition(
 					(float) (getSprite().getX() + dTime * getVel()
 							* Math.cos(Math.PI*3.0/2.0+frozenRadian)),
 					(float) (getSprite().getY() + dTime * getVel()
@@ -50,22 +49,22 @@ public class Delta extends Enemy {
 		}
 		else{
 			getSprite().setRotation((float)(Math.PI/Math.PI*180.0));
-			getSprite().setPosition(
+			setPosition(
 					(float) (getSprite().getX() + dTime * getVel()
 							* Math.cos(Math.PI*3.0/2.0)),
 					(float) (getSprite().getY() + dTime * getVel()
 							* Math.sin(Math.PI*3.0/2.0)));
 		}
-		moveBackUp();
+		checkIfOutOfBounds();
 
 	}
 	/**
 	 * Used for testing only.
 	 */
-	public void moveBackUp()
+	public void checkIfOutOfBounds()
 	{
-		if(getSprite().getY()<-100){
-			setPosition((float)(Math.random()*500), 500);
+		if(getSprite().getY()<100){
+			kill();
 		}
 	}
 

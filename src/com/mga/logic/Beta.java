@@ -47,7 +47,7 @@ public class Beta extends Enemy {
 		deviation=dev;
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Beta", "texture/enemy2.png");
-		spr.setScale(0.3f); // TODO: Add sprite scaling for all.
+
 		this.setSprite(spr);
 		getSprite().setX((float) Math.random() * 1000 + 500);
 		getSprite().setY((float) Math.random() * 1000 + 500);
@@ -124,7 +124,7 @@ public class Beta extends Enemy {
 				  //Beta currently fires Bullet.
 				 
 			} else {
-				getSprite().setPosition(
+				setPosition(
 						(float) (getSprite().getX() + dTime * getVel()
 								* Math.cos(frozenRadian)),
 						(float) (getSprite().getY() + dTime * getVel()
