@@ -19,14 +19,10 @@ public class Delta extends Enemy
 		frozenRadian=fr;
 		safeDistance=sd;
 	}
-<<<<<<< HEAD
+
 	public Delta(Sprite player, int vel, int health, String name) 
 	{
 		this(player,vel,health,name,(float)(Math.PI/4),100);
-=======
-	public Delta(Sprite player, int vel, int health, String name) {
-		this(player,vel,health,name,(float)(Math.PI/4),200);
->>>>>>> d117dea396e826f8ffff1474f99addabd8a8cbe3
 	}
 	public Delta()
 	{
@@ -70,10 +66,6 @@ public class Delta extends Enemy
 				* Math.sin(Math.PI*3.0/2.0)));
 		}
 		moveBackUp();
-<<<<<<< HEAD
-=======
-
->>>>>>> d117dea396e826f8ffff1474f99addabd8a8cbe3
 	}
 	/**
 	 * Used for testing only.
