@@ -1,7 +1,12 @@
-package com.mga.logic;
+package com.mga.game.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
+import com.mga.logic.Enemy;
+/**
+ * Enemy that follows the player, constant velocity
+ * @author Nicky
+ *
+ */
 public class Alpha extends Enemy {
 	public Alpha() {
 		this(null, 150, 1, "Alpha" + Math.random());

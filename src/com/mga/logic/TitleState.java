@@ -6,6 +6,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mga.game.enemy.Alpha;
+import com.mga.game.enemy.Beta;
+import com.mga.game.enemy.Delta;
+import com.mga.game.enemy.Gamma;
 import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
@@ -40,9 +44,9 @@ public class TitleState extends State
 			//new Beta(abig.getSprite(), 500, 100, "Beta"+Math.random(), 0.5f,1f/24f,(float)(Math.PI/6));
 			//new Beta(abig.getSprite(), 1000, 100, "Beta"+Math.random());
 			//new Alpha(abig.getSprite(), 150, 100, "Alpha" + Math.random());
-			//new Gamma(abig.getSprite(), 50, 100, "Gamma" + Math.random());
+			new Gamma(abig.getSprite(), 50, 100, "Gamma" + Math.random(),100);
 			//new Delta(abig.getSprite(), 300, 200, "Delta"+Math.random());
-			new EnemySpawner(abig.getSprite());
+			//new EnemySpawner(abig.getSprite());
 			
 			
 			

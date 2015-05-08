@@ -1,8 +1,13 @@
-package com.mga.logic;
+package com.mga.game.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.game.engine.CollisionObject;
-
+import com.mga.logic.Enemy;
+/**
+ * Exists only for enemy firing testing purposes.
+ * @author Nicky
+ *
+ */
 public class Bullet extends Enemy {
 
 	protected float frozenRadian, timeLimit;

@@ -1,9 +1,11 @@
-package com.mga.logic;
+package com.mga.game.enemy;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.game.engine.GameObject;
+import com.mga.logic.Enemy;
 
 public class EnemySpawner extends GameObject {
 	protected Sprite player;
@@ -52,10 +54,11 @@ public class EnemySpawner extends GameObject {
 		//new Gamma(player, 50, 100, "Gamma" + Math.random());
 		Enemy d=new Delta(player, 300, 200, "Delta"+Math.random());
 		enemyArrayList.add(d);
-		for (int i=0;i<enemyArrayList.size();i++){
-			if(enemyArrayList.get(i).isDead()){
-				enemyArrayList.remove(i);
-				removeGO(enemyArrayList.get(i).getName());
+		for (Iterator<Enemy> it = enemyArrayList.iterator(); it.hasNext() != false;){
+			Enemy enemy = it.next();
+			if(enemy.isDead()){
+				it.remove();
+				removeGO(enemy.getName());
 			}
 		}
 		System.out.println(enemyArrayList.size());

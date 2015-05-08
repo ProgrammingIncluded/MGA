@@ -1,7 +1,13 @@
-package com.mga.logic;
+package com.mga.game.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
+import com.mga.logic.Enemy;
+/**
+ * Versatile enemy, moves toward player but has the capability of not moving perfectly.
+ * Can charge up and attack.
+ * @author Nicky
+ *
+ */
 public class Beta extends Enemy {
 	protected float chargePeriod, frozenRadian, chargeTime, chargeFraction,deviation;
 

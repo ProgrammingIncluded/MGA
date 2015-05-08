@@ -1,7 +1,12 @@
-package com.mga.logic;
+package com.mga.game.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
+import com.mga.logic.Enemy;
+/**
+ * This Enemy orbits around the player, because it accelerates toward player.
+ * @author Merrycatch22
+ *
+ */
 public class Gamma extends Enemy {
 	protected float velX,velY,acceleration;
 	///velX and velY are now separate variables for velocity, from vel.
@@ -51,7 +56,8 @@ public class Gamma extends Enemy {
 	}
 	@Override
 	/**
-	 * attackPattern for Gamma is now to orbit around the player, as it tries to accelerate towards it. 
+	 * attackPattern for Gamma is now to orbit around the player,
+	 * as it tries to accelerate towards it. 
 	 */
 	public void attackPattern(float dTime) {
 		
@@ -72,6 +78,7 @@ public class Gamma extends Enemy {
 					(float) (getSprite().getY() + dTime * velY));
 			velX+=(float)(dTime*acceleration* dx / Math.sqrt(dx * dx + dy * dy));
 			velY+=(float)(dTime*acceleration* dy / Math.sqrt(dx * dx + dy * dy));
+			
 		}
 
 	}

@@ -1,7 +1,12 @@
-package com.mga.logic;
+package com.mga.game.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
+import com.mga.logic.Enemy;
+/**
+ * Moves down the screen and away from player.
+ * @author Nicky
+ *
+ */
 public class Delta extends Enemy
 {
 	protected float frozenRadian,safeDistance;
