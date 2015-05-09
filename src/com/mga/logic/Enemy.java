@@ -2,14 +2,16 @@ package com.mga.logic;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.game.engine.CollisionObject;
+
 /**
  * Abstract class that superclasses all implementable enemies.
  * @author Nicky
  *
  */
 public abstract class Enemy extends Shootable implements Killable {
-	protected int health, vel;
+	protected int vel;
 	protected Sprite player;
+	protected float health;
 
 	public Enemy(Sprite player, int vel, int health, String name) {
 		super(name);
@@ -18,11 +20,11 @@ public abstract class Enemy extends Shootable implements Killable {
 		this.vel = vel;
 	}
 
-	public int getHealth() {
+	public float getHealth() {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	public void setHealth(float health) {
 		this.health = health;
 	}
 
@@ -43,17 +45,22 @@ public abstract class Enemy extends Shootable implements Killable {
 	}
 
 
-
+	/** 
+	 * takes damage from projectile.
+	 */
 	public void onHit(Projectile p) {
-		
+		setHealth(getHealth()-p.getDamage());
 	}
 	
 	/**
-	 * tick calls attackPattern, the movements of the enemies.
+	 * tick calls attackPattern, the movements of the enemies. Also kills the Enemy if it isDead.
 	 */
 	@Override
 	public void tick(float dTime) {
 		attackPattern(dTime);
+		if(isDead()){
+			CollisionObject.removeGO(getName());
+		}
 
 	}
 	/**
@@ -65,7 +72,7 @@ public abstract class Enemy extends Shootable implements Killable {
 	 * sets health to zero when called.
 	 */
 	public boolean kill() {
-		setHealth(0);
+		setHealth(0.f);
 		return true;
 	}
 	/**

@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Scaling;
 import com.mga.game.engine.CollisionObject;
-import com.mga.game.engine.MGA;
+import com.mga.logic.Enemy;
+import com.mga.logic.Projectile;
 
 /**
  * Test class for GameObject.
@@ -54,6 +54,11 @@ public class Abigail extends CollisionObject
 		{
 			moveVect.add(0, -movSpeed.y * dTime);
 		}
+		if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+		{
+			Projectile p=new Projectile();
+			p.setPosition(this.getSprite().getX(), this.getSprite().getY()+200);
+		}
 		
 
 		miniCube.setPosition(moveVect.x, moveVect.y);
@@ -67,6 +72,9 @@ public class Abigail extends CollisionObject
 	@Override
     public void collided(CollisionObject colObj)
     {
-	   die();
+	   if(colObj instanceof Enemy){
+		   die();
+	   }
+		   
     }
 }

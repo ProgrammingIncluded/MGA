@@ -10,41 +10,47 @@ import com.mga.game.engine.CollisionObject;
  *
  */
 public class Projectile extends CollisionObject {
-
-	public Projectile(Rectangle bound) {
-		super(bound);
-		// TODO Auto-generated constructor stub
-	}
-
+	protected float damage;
 	public Projectile() {
 		// TODO Auto-generated constructor stub
+		this("Projectile"+Math.random());
+		
+	}
+	public Projectile(String name){
+		this(name,25.f);
 	}
 
-	public Projectile(String name) {
+	public Projectile(String name,float damage) {
 		super(name);
+		this.damage=damage;
+		Sprite spr = this.getSpriteHandler().createSprite(
+				this.getName(), "Abigail", "texture/Pac/dot.png");
+		//spr.setScale(0.5f); // TODO: Add sprite scaling for all.
+		this.setSprite(spr);
 		// TODO Auto-generated constructor stub
 	}
 
-	public Projectile(Sprite defSprite) {
-		super(defSprite);
-		// TODO Auto-generated constructor stub
+	public float getDamage() {
+		return damage;
 	}
 
-	public Projectile(Rectangle bound, String name, Sprite defSprite) {
-		super(bound, name, defSprite);
-		// TODO Auto-generated constructor stub
+	public void setDamage(float damage) {
+		this.damage = damage;
 	}
 
 	@Override
 	public void collided(CollisionObject colObj) {
-		// TODO Auto-generated method stub
+		if(colObj instanceof Shootable){
+			CollisionObject.removeGO(getName());
+		}
+		
 
 	}
 
 	@Override
 	public void tick(float dTime) {
-		// TODO Auto-generated method stub
-
+		setPosition(getSprite().getX(),getSprite().getY()+dTime*300);
+		
 	}
 
 }
