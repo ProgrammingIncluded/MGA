@@ -72,6 +72,7 @@ public abstract class GameObject
 		{
 			this.goSpr = MGA.getSpriteHandler().getDefContainer().containerObj;
 		}
+		// TODO: COPY ANIMATED GO TO HERE
 		GameObject.addGO(name, this);
 		isVisible = true;
 		sprHand = MGA.getSpriteHandler();
@@ -85,7 +86,7 @@ public abstract class GameObject
 	 * Internally managed, including batches, in order to prevent confusion.
 	 * TODO: Optimize draw calls here.
 	 */
-	public static void draw()
+	public static void draw(float dTime)
 	{
 		SpriteBatch batch = new SpriteBatch();
 		batch.begin();
@@ -95,7 +96,7 @@ public abstract class GameObject
 		{
 			dSpr = go.goSpr;
 			if(go.isVisible == true && dSpr != null)
-				dSpr.draw(batch);
+				dSpr.draw(batch);	
 		}
 		updatingContainer = false;
 		batch.end();
