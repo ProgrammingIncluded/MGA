@@ -1,16 +1,18 @@
 package com.mga.logic;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Rectangle;
 import com.mga.game.engine.CollisionObject;
+import com.mga.game.engine.GameObject;
+import com.mga.logic.playfield.Abigail;
 
 /**
  * Does nothing at the moment expect exist.
  * @author Nicky
  *
  */
-public class Projectile extends CollisionObject {
+public abstract class Projectile extends CollisionObject {
 	protected float damage;
+	protected GameObject owner;
 	public Projectile() {
 		// TODO Auto-generated constructor stub
 		this("Projectile"+Math.random());
@@ -21,12 +23,24 @@ public class Projectile extends CollisionObject {
 	}
 
 	public Projectile(String name,float damage) {
+		this(name,damage,null);
+	}
+	
+	public Projectile(GameObject owner){
+		this("Projectile"+Math.random(),25.f,owner);
+	}
+	
+	public Projectile(String name,float damage,GameObject owner) {
 		super(name);
 		this.damage=damage;
+		this.owner=owner;
 		Sprite spr = this.getSpriteHandler().createSprite(
 				this.getName(), "Abigail", "texture/Pac/dot.png");
 		//spr.setScale(0.5f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
+		if(owner!=null){
+			setPosition(owner.getSprite().getX(),owner.getSprite().getY());
+		}
 		// TODO Auto-generated constructor stub
 	}
 
@@ -38,19 +52,32 @@ public class Projectile extends CollisionObject {
 		this.damage = damage;
 	}
 
+	public GameObject getOwner() {
+		return owner;
+	}
+	public void setOwner(GameObject owner) {
+		this.owner = owner;
+	}
 	@Override
 	public void collided(CollisionObject colObj) {
-		if(colObj instanceof Shootable){
+		if(colObj instanceof Shootable&&this.getOwner().getName().equals("Abigail")){
 			CollisionObject.removeGO(getName());
+			this.setIsCollidable(false);
+		}
+		if(colObj instanceof Abigail&&!this.getOwner().getName().equals("Abigail")){
+			CollisionObject.removeGO(getName());
+			this.setIsCollidable(false);
 		}
 		
 
 	}
-
+	
 	@Override
 	public void tick(float dTime) {
-		setPosition(getSprite().getX(),getSprite().getY()+dTime*300);
+		flightPattern(dTime);
 		
 	}
+	
+	public abstract void flightPattern(float dTime);
 
 }

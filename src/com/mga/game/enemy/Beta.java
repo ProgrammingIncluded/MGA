@@ -1,6 +1,7 @@
 package com.mga.game.enemy;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.mga.game.projectiles.StraightBullet;
 import com.mga.logic.Enemy;
 /**
  * Versatile enemy, moves toward player but has the capability of not moving perfectly.
@@ -8,7 +9,8 @@ import com.mga.logic.Enemy;
  * @author Nicky
  *
  */
-public class Beta extends Enemy {
+public class Beta extends Enemy
+{
 	protected float chargePeriod, frozenRadian, chargeTime, chargeFraction,deviation;
 
 	///frozenRadian "freezes" beta into charging straight forward.
@@ -16,36 +18,31 @@ public class Beta extends Enemy {
 	///chargeFraction tells how much time is spent charging
 	///deviation was supposed to be part of Gamma, but I realized that Beta and Gamma where too similar.
 	///it just makes the enemy charge away by deviation radians.
-	public Beta() {
+	public Beta()
+	{
 		this(null, 500, 1, "Beta" + Math.random());
 	}
 
-	public Beta(Sprite player, int vel, int health, String name) {
-		/*
-		 * super(player, vel, health, name); chargeTime=6; Sprite spr =
-		 * this.getSpriteHandler().createSprite( this.getName(), "EnemyTwo",
-		 * "texture/enemy2.png"); spr.setScale(0.1f); // TODO: Add sprite
-		 * scaling for all. this.setSprite(spr); setPosition(400,400);
-		 */
+	public Beta(Sprite player, int vel, int health, String name)
+	{
+		
 		this(player, vel, health, name, 3);
 	}
 
-	public Beta(Sprite player, int vel, int health, String name, float ct) {
-		/*
-		 * super(player, vel, health, name); chargeTime=ct; Sprite spr =
-		 * this.getSpriteHandler().createSprite( this.getName(), "Enemy2",
-		 * "texture/enemy2.png"); spr.setScale(0.1f); // TODO: Add sprite
-		 * scaling for all. this.setSprite(spr); setPosition(400,400);
-		 */
+	public Beta(Sprite player, int vel, int health, String name, float ct) 
+	{
+		
 		this(player, vel, health, name, ct, 5f / 6f);
 	}
 
 	public Beta(Sprite player, int vel, int health, String name, float ct,
-			float cf) {
+			float cf)
+	{
 		this(player,vel,health,name,ct,cf,0);
 	}
 	public Beta(Sprite player, int vel, int health, String name, float ct,
-			float cf,float dev) {
+			float cf,float dev) 
+	{
 		super(player, vel, health, name);
 		chargeTime = ct;
 		chargeFraction = cf;
@@ -58,43 +55,53 @@ public class Beta extends Enemy {
 		getSprite().setX((float) Math.random() * 1000 + 500);
 		getSprite().setY((float) Math.random() * 1000 + 500);
 	}
-	public float getChargeFraction() {
+	public float getChargeFraction()
+	{
 		return chargeFraction;
 	}
 
-	public void setChargeFraction(float chargeFraction) {
+	public void setChargeFraction(float chargeFraction) 
+	{
 		this.chargeFraction = chargeFraction;
 	}
 
-	public float getChargePeriod() {
+	public float getChargePeriod()
+	{
 		return chargePeriod;
 	}
 
-	public void setChargePeriod(float chargePeriod) {
+	public void setChargePeriod(float chargePeriod) 
+	{
 		this.chargePeriod = chargePeriod;
 	}
 
-	public float getFrozenRadian() {
+	public float getFrozenRadian()
+	{
 		return frozenRadian;
 	}
 
-	public void setFrozenRadian(float frozenRadian) {
+	public void setFrozenRadian(float frozenRadian)
+	{
 		this.frozenRadian = frozenRadian;
 	}
 
-	public float getChargeTime() {
+	public float getChargeTime() 
+	{
 		return chargeTime;
 	}
 
-	public void setChargeTime(float chargeTime) {
+	public void setChargeTime(float chargeTime)
+	{
 		this.chargeTime = chargeTime;
 	}
 
-	public float getDeviation() {
+	public float getDeviation() 
+	{
 		return deviation;
 	}
 
-	public void setDeviation(float deviation) {
+	public void setDeviation(float deviation) 
+	{
 		this.deviation = deviation;
 	}
 
@@ -104,13 +111,16 @@ public class Beta extends Enemy {
 	 * changed possibly.
 	 */
 	@Override
-	public void attackPattern(float dTime) {
+	public void attackPattern(float dTime) 
+	{
 
-		if (getPlayer() == null) {
+		if (getPlayer() == null)
+		{
 			removeGO(getName());
 		}
 
-		else {
+		else 
+		{
 			chargePeriod += dTime;
 			float dx = getPlayer().getX() - getSprite().getX();
 			float dy = getPlayer().getY() - getSprite().getY();
@@ -118,18 +128,22 @@ public class Beta extends Enemy {
 			if (dx < 0) {
 				theta += 180.0;
 			}
-			if (chargePeriod <= chargeFraction * chargeTime) {
+			if (chargePeriod <= chargeFraction * chargeTime) 
+			{
 				getSprite().setRotation(theta);
 				frozenRadian = (float) ((theta + 90) * Math.PI / 180+deviation*2*Math.random()-deviation);
 				
-			} else if (chargePeriod > chargeTime) {
+			} 
+			else if (chargePeriod > chargeTime) 
+			{
 				chargePeriod = 0;
 				
-				  Bullet b =new Bullet(getSprite(),1000,1,"Bullet"+Math.random(),frozenRadian);
-				  //b.setPosition(getSprite().getX(),getSprite().getY());
-				  //Beta currently fires Bullet.
+				 new StraightBullet(this,frozenRadian,300);
+
 				 
-			} else {
+			} 
+			else 
+			{
 				setPosition(
 						(float) (getSprite().getX() + dTime * getVel()
 								* Math.cos(frozenRadian)),

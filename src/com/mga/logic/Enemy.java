@@ -8,39 +8,47 @@ import com.mga.game.engine.CollisionObject;
  * @author Nicky
  *
  */
-public abstract class Enemy extends Shootable implements Killable {
+public abstract class Enemy extends Shootable implements Killable
+{
 	protected int vel;
 	protected Sprite player;
 	protected float health;
 
-	public Enemy(Sprite player, int vel, int health, String name) {
+	public Enemy(Sprite player, int vel, int health, String name) 
+	{
 		super(name);
 		this.player = player;
 		this.health = health;
 		this.vel = vel;
 	}
 
-	public float getHealth() {
+	public float getHealth() 
+	{
 		return health;
 	}
 
-	public void setHealth(float health) {
+	public void setHealth(float health) 
+	{
 		this.health = health;
 	}
 
-	public int getVel() {
+	public int getVel()
+	{
 		return vel;
 	}
 
-	public void setVel(int vel) {
+	public void setVel(int vel)
+	{
 		this.vel = vel;
 	}
 
-	public Sprite getPlayer() {
+	public Sprite getPlayer() 
+	{
 		return player;
 	}
 
-	public void setPlayer(Sprite player) {
+	public void setPlayer(Sprite player)
+	{
 		this.player = player;
 	}
 
@@ -48,18 +56,25 @@ public abstract class Enemy extends Shootable implements Killable {
 	/** 
 	 * takes damage from projectile.
 	 */
-	public void onHit(Projectile p) {
-		setHealth(getHealth()-p.getDamage());
+	public void onHit(Projectile p)
+	{
+		if(p.getOwner().getName().equals("Abigail")){
+			setHealth(getHealth()-p.getDamage());
+		}
+		
 	}
 	
 	/**
 	 * tick calls attackPattern, the movements of the enemies. Also kills the Enemy if it isDead.
 	 */
 	@Override
-	public void tick(float dTime) {
+	public void tick(float dTime)
+	{
 		attackPattern(dTime);
-		if(isDead()){
+		if(isDead())
+		{
 			CollisionObject.removeGO(getName());
+			this.setIsCollidable(false);
 		}
 
 	}
@@ -71,14 +86,16 @@ public abstract class Enemy extends Shootable implements Killable {
 	/**
 	 * sets health to zero when called.
 	 */
-	public boolean kill() {
+	public boolean kill() 
+	{
 		setHealth(0.f);
 		return true;
 	}
 	/**
 	 * Returns whether health is <=0 or not.
 	 */
-	public boolean isDead() {
+	public boolean isDead() 
+	{
 		return (getHealth() <= 0);
 	}
 }

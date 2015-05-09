@@ -4,15 +4,18 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.logic.Enemy;
 /**
  * Enemy that follows the player, constant velocity
- * @author Nicky
+ * @author Merrycatch22
  *
  */
-public class Alpha extends Enemy {
-	public Alpha() {
+public class Alpha extends Enemy
+{
+	public Alpha() 
+	{
 		this(null, 150, 1, "Alpha" + Math.random());
 	}
 
-	public Alpha(Sprite player, int vel, int health, String name) {
+	public Alpha(Sprite player, int vel, int health, String name) 
+	{
 		super(player, vel, health, name);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Alpha", "texture/enemy.png");
@@ -29,14 +32,17 @@ public class Alpha extends Enemy {
 	 * 
 	 */
 	@Override
-	public void attackPattern(float dTime) {
+	public void attackPattern(float dTime) 
+	{
 		// TODO Auto-generated method stub
 
-		if (getPlayer() == null) {
+		if (getPlayer() == null)
+		{
 			removeGO(getName());
 		}
 		// TODO Auto-generated method stub
-		else {
+		else 
+		{
 			float dx = getPlayer().getX() - getSprite().getX();
 			float dy = getPlayer().getY() - getSprite().getY();
 			float theta = (float) (180.0 / Math.PI * Math.atan(dy / dx) - 90.0);

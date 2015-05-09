@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mga.game.engine.CollisionObject;
+import com.mga.game.projectiles.StraightBullet;
 import com.mga.logic.Enemy;
 import com.mga.logic.Projectile;
 
@@ -56,8 +57,8 @@ public class Abigail extends CollisionObject
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
 		{
-			Projectile p=new Projectile();
-			p.setPosition(this.getSprite().getX(), this.getSprite().getY()+200);
+			new StraightBullet(this);
+			
 		}
 		
 
@@ -74,6 +75,15 @@ public class Abigail extends CollisionObject
     {
 	   if(colObj instanceof Enemy){
 		   die();
+	   }
+	   
+	   if(colObj instanceof Projectile){
+		   
+		   Projectile p=(Projectile)(colObj);
+		   
+		   if(p.getOwner().getName().equals("Abigail")==false){
+			   die();
+		   }
 	   }
 		   
     }

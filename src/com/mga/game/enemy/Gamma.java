@@ -7,11 +7,13 @@ import com.mga.logic.Enemy;
  * @author Merrycatch22
  *
  */
-public class Gamma extends Enemy {
+public class Gamma extends Enemy
+{
 	protected float velX,velY,acceleration;
 	///velX and velY are now separate variables for velocity, from vel.
 	///acceleration is how much acceleration is directed towards the player.
-	public Gamma(Sprite player, int vel, int health, String name,float acc) {
+	public Gamma(Sprite player, int vel, int health, String name,float acc) 
+	{
 		super(player, vel, health, name);
 		acceleration=acc;
 		getSprite().setX((float) Math.random() * 100 + 50);
@@ -19,7 +21,8 @@ public class Gamma extends Enemy {
 		float dx = getPlayer().getX() - getSprite().getX();
 		float dy = getPlayer().getY() - getSprite().getY();
 		float theta = (float) (180.0 / Math.PI * Math.atan(dy / dx) - 90.0);
-		if (dx < 0) {
+		if (dx < 0)
+		{
 			theta += 180.0;
 		}
 		getSprite().setRotation(theta);
@@ -29,29 +32,37 @@ public class Gamma extends Enemy {
 						/ Math.sqrt(dx * dx + dy * dy));
 		
 	}
-	public Gamma (Sprite player, int vel, int health, String name){
+	public Gamma (Sprite player, int vel, int health, String name)
+	{
 		this(player, vel,health,name,1000);
 	}
-	public Gamma(){
+	public Gamma()
+	{
 		this(null,50,1,"Gamma"+Math.random());
 	}
 
-	public float getVelX() {
+	public float getVelX()
+	{
 		return velX;
 	}
-	public void setVelX(float velX) {
+	public void setVelX(float velX)
+	{
 		this.velX = velX;
 	}
-	public float getVelY() {
+	public float getVelY() 
+	{
 		return velY;
 	}
-	public void setVelY(float velY) {
+	public void setVelY(float velY) 
+	{
 		this.velY = velY;
 	}
-	public float getAcceleration() {
+	public float getAcceleration()
+	{
 		return acceleration;
 	}
-	public void setAcceleration(float acceleration) {
+	public void setAcceleration(float acceleration) 
+	{
 		this.acceleration = acceleration;
 	}
 	@Override
@@ -59,17 +70,21 @@ public class Gamma extends Enemy {
 	 * attackPattern for Gamma is now to orbit around the player,
 	 * as it tries to accelerate towards it. 
 	 */
-	public void attackPattern(float dTime) {
+	public void attackPattern(float dTime) 
+	{
 		
-		if (getPlayer() == null) {
+		if (getPlayer() == null) 
+		{
 			removeGO(getName());
 		}
 
-		else {
+		else 
+		{
 			float dx = getPlayer().getX() - getSprite().getX();
 			float dy = getPlayer().getY() - getSprite().getY();
 			float theta = (float) (180.0 / Math.PI * Math.atan(dy / dx) - 90.0);
-			if (dx < 0) {
+			if (dx < 0)
+			{
 				theta += 180.0;
 			}
 			getSprite().setRotation(theta);
