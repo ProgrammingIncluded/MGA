@@ -57,11 +57,13 @@ public class TitleState extends State
 	{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		SpriteBatch batch = new SpriteBatch();
 		batch.begin();
 		background.draw(batch);
 		batch.end();
 		GameObject.draw();
+
 	}
 
 	@Override

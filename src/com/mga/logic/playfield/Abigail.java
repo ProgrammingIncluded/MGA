@@ -25,10 +25,12 @@ public class Abigail extends CollisionObject
 	{
 		super("Abigail");
 		Sprite spr = this.getSpriteHandler().createSprite(
-				this.getName(), "Abigail", "texture/Pac/dot.png");
-		//spr.setScale(0.5f); // TODO: Add sprite scaling for all.
+
+				this.getName(), "Abigail", "textures/runningcat.png");
+		spr.setScale(1);
 		this.setSprite(spr);
-		//this.setPosition((float)(Math.random()*500), (float)(Math.random()*500));
+	//	this.setAnimation(4, 2, 0.1f);
+
 	}
 
 	@Override
