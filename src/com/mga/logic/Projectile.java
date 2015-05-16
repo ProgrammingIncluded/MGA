@@ -13,6 +13,7 @@ import com.mga.logic.playfield.Abigail;
 public abstract class Projectile extends CollisionObject {
 	protected float damage;
 	protected GameObject owner;
+	protected float timeLimit;
 	public Projectile() {
 		// TODO Auto-generated constructor stub
 		this("Projectile"+Math.random());
@@ -34,6 +35,7 @@ public abstract class Projectile extends CollisionObject {
 		super(name);
 		this.damage=damage;
 		this.owner=owner;
+		timeLimit=0;
 		Sprite spr = this.getSpriteHandler().createSprite(
 				this.getName(), "Abigail", "texture/Pac/dot.png");
 		//spr.setScale(0.5f); // TODO: Add sprite scaling for all.
@@ -75,6 +77,11 @@ public abstract class Projectile extends CollisionObject {
 	@Override
 	public void tick(float dTime) {
 		flightPattern(dTime);
+		timeLimit+=dTime;
+		if(timeLimit>5){
+			CollisionObject.removeGO(getName());
+			this.setIsCollidable(false);
+		}
 		
 	}
 	

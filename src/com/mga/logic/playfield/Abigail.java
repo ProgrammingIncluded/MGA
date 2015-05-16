@@ -18,6 +18,8 @@ public class Abigail extends CollisionObject
 	/* Local Variables */
 	public boolean isDead = false;
 	Vector2 movSpeed = new Vector2(400f, 400f);
+	public boolean tempFiringMech1=false;
+	public float tempFiringMech2=(float)(Math.PI/2);
 	
 	public Abigail()
 	{
@@ -57,7 +59,26 @@ public class Abigail extends CollisionObject
 		}
 		if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
 		{
-			new StraightBullet(this);
+			/*new StraightBullet(this,(float)(Math.PI/2+0.25-0.5*Math.random()),500);
+			if(tempFiringMech1){
+				tempFiringMech1=!tempFiringMech1;
+				new StraightBullet(this,(float)(Math.PI/2),500);
+			}
+			else{
+				new StraightBullet(this,(float)(Math.PI/2+0.5),500);
+				new StraightBullet(this,(float)(Math.PI/2-0.5),500);
+				tempFiringMech1=!tempFiringMech1;
+			}*/
+			new StraightBullet(this,(float)(tempFiringMech2),500);
+			if(tempFiringMech2<(float)(Math.PI/4)||tempFiringMech2>(float)(3*Math.PI/4)){
+				tempFiringMech1=!tempFiringMech1;
+			}
+			if(tempFiringMech1){
+				tempFiringMech2+=0.05;
+			}
+			else{
+				tempFiringMech2-=0.05;
+			}
 			
 		}
 		

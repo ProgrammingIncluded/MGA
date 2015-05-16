@@ -18,8 +18,8 @@ public class Delta extends Enemy
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Delta", "texture/enemy.png");
 		this.setSprite(spr);
-		getSprite().setX((float) Math.random() * 300);
-		getSprite().setY((float) Math.random() * 300 + 300);
+		getSprite().setX((float) Math.random() * 1000);
+		getSprite().setY((float) Math.random() * 400 + 400);
 		frozenRadian=fr;
 		safeDistance=sd;
 	}
@@ -82,7 +82,7 @@ public class Delta extends Enemy
 	public void checkIfOutOfBounds()
 	{
 
-		if(getSprite().getY()<100){
+		if(getSprite().getY()<0){
 			kill();
 		}
 
