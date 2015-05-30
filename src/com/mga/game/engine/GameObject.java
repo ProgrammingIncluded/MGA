@@ -84,7 +84,7 @@ public abstract class GameObject
 		isVisible = true;
 		sprHand = MGA.getSpriteHandler();
 		sndHand = MGA.getSoundHandler();
-		setAnimation(1,1,1.0f);
+		setAnimation(1,1,0.0f);
 	}
 	
 	/*Animated Constructors*/

@@ -25,7 +25,7 @@ public class Abigail extends CollisionObject
 				this.getName(), "Abigail", "textures/runningcat.png");
 		spr.setScale(1);
 		this.setSprite(spr);
-		this.setAnimation(4, 2, 0.1f);
+		this.setAnimation(1, 1, 0.1f);
 	}
 
 	@Override
