@@ -5,8 +5,11 @@ import java.util.LinkedHashMap;
 
 import javafx.util.Pair;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mga.logic.Config;
 
@@ -30,13 +33,14 @@ public abstract class GameObject
 	protected SoundHandler sndHand;
 	
 	/*Static Variables*/
-	static String DEF_GO_NAME = Config.DEF_GO_NAME;
-	static LinkedHashMap<String, GameObject> goLHMap;
+	public static String DEF_GO_NAME = Config.DEF_GO_NAME;
+	public final static float DEF_PLAYBACK_SPEED = 1.0f;
+	private static LinkedHashMap<String, GameObject> goLHMap;
 	// Queue area for new GO while updating GOs.
-	static ArrayList<Pair<String, GameObject>>goObjectAdd;
+	private static ArrayList<Pair<String, GameObject>>goObjectAdd;
 	// Garbage collection to remove the GO which were deleted in update pass.
-	static ArrayList<String>garbage;
-	static boolean isIntialized = false;
+	private static ArrayList<String>garbage;
+	private static boolean isIntialized = false;
 	// Var to hold current updates on goLHMap
 	private static boolean updatingContainer = false;
 	
@@ -45,6 +49,9 @@ public abstract class GameObject
 	//private int uniqueID;
 	private String name;
 	private Sprite goSpr;
+	// Animation Var
+	protected Animation animation = null;
+	protected float animationTime = 0;
 
 	public GameObject()
 	{
@@ -72,10 +79,25 @@ public abstract class GameObject
 		{
 			this.goSpr = MGA.getSpriteHandler().getDefContainer().containerObj;
 		}
+		// TODO: COPY ANIMATED GO TO HERE
 		GameObject.addGO(name, this);
 		isVisible = true;
 		sprHand = MGA.getSpriteHandler();
 		sndHand = MGA.getSoundHandler();
+		setAnimation(1,1,0.0f);
+	}
+	
+	/*Animated Constructors*/
+	GameObject(Sprite spr, int cols, int rows, float pbSpeed)
+	{
+		this(DEF_GO_NAME, null, cols, rows, pbSpeed);
+	}
+	
+	GameObject(String name, Sprite spr, int cols, int rows, float pbSpeed)
+	{
+		this(name, spr);
+		setAnimation(cols,rows,pbSpeed);
+		animationTime = 0;
 	}
 	
 	public abstract void tick(float dTime);
@@ -85,7 +107,7 @@ public abstract class GameObject
 	 * Internally managed, including batches, in order to prevent confusion.
 	 * TODO: Optimize draw calls here.
 	 */
-	public static void draw()
+	public static void draw(float dTime)
 	{
 		SpriteBatch batch = new SpriteBatch();
 		batch.begin();
@@ -93,9 +115,12 @@ public abstract class GameObject
 		updatingContainer = true;
 		for(GameObject go : goLHMap.values())
 		{
+			if(go.animation.getKeyFrames().length >= 1)
+				go.animationTime += dTime;
 			dSpr = go.goSpr;
 			if(go.isVisible == true && dSpr != null)
-				dSpr.draw(batch);
+				batch.draw(go.animation.getKeyFrame(go.animationTime, true), dSpr.getX(), 
+						dSpr.getY(),dSpr.getHeight(), dSpr.getWidth());
 		}
 		updatingContainer = false;
 		batch.end();
@@ -129,7 +154,12 @@ public abstract class GameObject
 		updatingContainer = false;
 		return true;
 	}
-
+	
+	public static GameObject getGO(String id)
+	{
+		return goLHMap.get(id);
+	}
+	
 	/**
 	 * Add a GameObject to the static tracker.
 	 */
@@ -149,22 +179,33 @@ public abstract class GameObject
 	/**
 	 *  Remove a GameObject from the static tracker. i.e. delete the game object.
 	 */
-	public static boolean removeGO(String name)
+	public static GameObject removeGO(String name)
 	{
-		if(name == null || !goLHMap.containsKey(name))
-			return false;
+		if(name == null)
+			return null;
 		
+		GameObject go = null;
 		if(updatingContainer == true)
 		{
 			garbage.add(name);
 		}
 		else
 		{
-			GameObject go = goLHMap.remove(name);
+			go = goLHMap.remove(name);
+			if(go == null)
+				return null;
 			go.sprHand.deleteContainer(go.name); // TODO remove spritehandler and let GO handle sprite naming w/unique id.			
 		}
 
-		return true;
+		return go;
+	}
+	
+	/**
+	 * Deletes the GameObject from static tracker with GO object.
+	 */
+	public static GameObject removeGO(GameObject go)
+	{
+		return removeGO(go.getName());
 	}
 	
 	public static boolean intialize()
@@ -207,6 +248,10 @@ public abstract class GameObject
 	}
 	
 	/* Setters */
+	public Animation getAnimation()
+	{
+		return animation;
+	}
 	/**
 	 * Short cut function for set position of Sprite. Sets the pos.
 	 * of GO.
@@ -234,9 +279,7 @@ public abstract class GameObject
 	public boolean setName(String name)
 	{
 		if(name == null || name.length() == 0)
-		{
 			return false;
-		}
 		this.name = name;
 		return true;
 	}
@@ -249,8 +292,29 @@ public abstract class GameObject
 	{
 		if(spr == null)
 			return false;
+		spr.setOriginCenter();
 		this.goSpr = spr;
-		return true;
+		return true; 
+	}
+	
+	public boolean setAnimation(int rows, int cols, float pbSpeed)
+	{
+		if(goSpr == null)
+			return false;
+		Texture thisSprite = getSprite().getTexture();
+		TextureRegion[][] tmp = TextureRegion.split(thisSprite, 
+			thisSprite.getWidth()/cols, thisSprite.getHeight()/rows);
+		int index = 0;
+		TextureRegion[] frames = new TextureRegion[cols*rows];
+        for (int i = 0; i < rows; i++) 
+        {
+            for (int j = 0; j < cols; j++) 
+            {
+                frames[index++] = tmp[i][j];
+            }
+        }
+        animation = new Animation(pbSpeed, frames);
+        return true;
 	}
 	
 	/**

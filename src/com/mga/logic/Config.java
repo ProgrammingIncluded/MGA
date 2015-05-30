@@ -18,7 +18,6 @@ public class Config
 {
 	/**
 	 * Loads the config.txt found in the desktop/bin folder.
-	 * @return
 	 */
 	public static boolean loadConfigFile()
 	{

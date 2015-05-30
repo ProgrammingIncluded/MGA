@@ -52,12 +52,13 @@ public class SpriteHandler extends ContainerHandler<Sprite>
 	/// or else it will not work. Helper function that
 	/// creates a texture and then creates a Sprite for that texture.
 	/// By passes need for coder to use TextureManager on their own.
+	/// Creates a new default texture if wrong texture.
 	public Sprite createSprite(String spriteName, String textureName,
 		String fileName)
 	{
 		if(texManager == null)
 		{
-			return getDefContainer().containerObj;
+			return new Sprite(getDefContainer().containerObj);
 		}
 		
 		return addContainer(spriteName, fileName, 
