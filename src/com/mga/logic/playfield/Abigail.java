@@ -29,11 +29,8 @@ public class Abigail extends CollisionObject
 		Sprite spr = this.getSpriteHandler().createSprite(
 
 				this.getName(), "Abigail", "textures/runningcat.png");
-		spr.setScale(1);
 		this.setSprite(spr);
-		score=new Score(this);
-	//	this.setAnimation(4, 2, 0.1f);
-
+		this.setAnimation(2, 4, 0.1f);
 	}
 
 	@Override
