@@ -120,7 +120,7 @@ public abstract class GameObject
 			dSpr = go.goSpr;
 			if(go.isVisible == true && dSpr != null)
 				batch.draw(go.animation.getKeyFrame(go.animationTime, true), dSpr.getX(), 
-						dSpr.getY(),dSpr.getHeight(), dSpr.getWidth());
+						dSpr.getY(),dSpr.getHeight()*dSpr.getScaleX(), dSpr.getWidth()*dSpr.getScaleY());
 		}
 		updatingContainer = false;
 		batch.end();
@@ -293,6 +293,7 @@ public abstract class GameObject
 		if(spr == null)
 			return false;
 		spr.setOriginCenter();
+		spr.getBoundingRectangle().setCenter(spr.getOriginX(), spr.getOriginY());
 		this.goSpr = spr;
 		return true; 
 	}
@@ -301,7 +302,8 @@ public abstract class GameObject
 	{
 		if(goSpr == null)
 			return false;
-		Texture thisSprite = getSprite().getTexture();
+		Sprite sprite = getSprite();
+		Texture thisSprite = sprite.getTexture();
 		TextureRegion[][] tmp = TextureRegion.split(thisSprite, 
 			thisSprite.getWidth()/cols, thisSprite.getHeight()/rows);
 		int index = 0;
@@ -314,6 +316,9 @@ public abstract class GameObject
             }
         }
         animation = new Animation(pbSpeed, frames);
+        sprite.setBounds(sprite.getX(), sprite.getY(), frames[0].getRegionHeight(), 
+        		frames[0].getRegionWidth());
+        
         return true;
 	}
 	
