@@ -8,6 +8,7 @@ import com.mga.game.engine.CollisionObject;
 import com.mga.game.projectiles.StraightBullet;
 import com.mga.logic.Enemy;
 import com.mga.logic.Projectile;
+import com.mga.logic.Score;
 
 /**
  * Test class for GameObject.
@@ -20,6 +21,7 @@ public class Abigail extends CollisionObject
 	Vector2 movSpeed = new Vector2(400f, 400f);
 	public boolean tempFiringMech1=false;
 	public float tempFiringMech2=(float)(Math.PI/2);
+	public Score score;
 	
 	public Abigail()
 	{
@@ -29,6 +31,7 @@ public class Abigail extends CollisionObject
 				this.getName(), "Abigail", "textures/runningcat.png");
 		spr.setScale(1);
 		this.setSprite(spr);
+		score=new Score(this);
 	//	this.setAnimation(4, 2, 0.1f);
 
 	}

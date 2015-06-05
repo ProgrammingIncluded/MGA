@@ -52,8 +52,8 @@ public class Beta extends Enemy
 				"Beta", "texture/enemy2.png");
 
 		this.setSprite(spr);
-		getSprite().setX((float) Math.random() * 1000 + 500);
-		getSprite().setY((float) Math.random() * 1000 + 500);
+		getSprite().setX(xPos);
+		getSprite().setY(yPos);
 	}
 	public float getChargeFraction()
 	{

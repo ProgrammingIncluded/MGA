@@ -14,13 +14,15 @@ public class Alpha extends Enemy
 		this(null, 150, 1, "Alpha" + Math.random(),0,0);
 	}
 	
-	public Alpha(Sprite player, int vel, int health, String name,int xPos,int yPos) 
+	public Alpha(Sprite player, int vel, int health, String name,float xPos,float yPos) 
 	{
 		super(player, vel, health, name,xPos,yPos);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Alpha", "texture/enemy.png");
 
 		this.setSprite(spr);
+		getSprite().setX(xPos);
+		getSprite().setY(yPos);
 
 	}
 

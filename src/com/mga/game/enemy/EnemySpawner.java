@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.game.engine.GameObject;
 import com.mga.logic.Enemy;
+import com.mga.logic.Score;
 
 public abstract class EnemySpawner<T extends Enemy> extends GameObject 
 {
@@ -13,6 +14,7 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 	protected ArrayList <T> enemyArrayList;
 	protected float chargeTime, chargeMax;
 	protected float minX,minY,maxX,maxY;
+	protected Score score;
 	public EnemySpawner()
 	{
 		this(null);
@@ -120,12 +122,17 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 				T enemy = it.next();
 				if(enemy.isDead())
 				{
+					score.addPoints(1);
+					score.printPoints();
 					it.remove();
 					removeGO(enemy.getName());
 				}
 			}
-			System.out.println(enemyArrayList.size());
+			//System.out.println(enemyArrayList.size());
 		}
+	}
+	public void setScoreBoard(Score s){
+		score=s;
 	}
 	
 	protected abstract T createEnemy();

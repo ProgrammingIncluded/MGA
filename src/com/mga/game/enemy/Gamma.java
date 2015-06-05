@@ -15,6 +15,8 @@ public class Gamma extends Enemy
 	public Gamma(Sprite player, int vel, int health, String name,float xPos,float yPos,float acc) 
 	{
 		super(player, vel, health, name,xPos,yPos);
+		getSprite().setX(xPos);
+		getSprite().setY(yPos);
 		acceleration=acc;
 
 		float dx = getPlayer().getX() - getSprite().getX();

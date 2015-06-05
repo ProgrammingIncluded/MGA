@@ -65,6 +65,7 @@ public abstract class Projectile extends CollisionObject {
 		if(colObj instanceof Shootable&&this.getOwner().getName().equals("Abigail")){
 			CollisionObject.removeGO(getName());
 			this.setIsCollidable(false);
+			
 		}
 		if(colObj instanceof Abigail&&!this.getOwner().getName().equals("Abigail")){
 			CollisionObject.removeGO(getName());

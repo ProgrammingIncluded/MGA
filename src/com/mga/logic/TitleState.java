@@ -6,7 +6,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mga.game.enemy.AlphaSpawner;
+import com.mga.game.enemy.BetaSpawner;
 import com.mga.game.enemy.DeltaSpawner;
+import com.mga.game.enemy.EnemySpawner;
+import com.mga.game.enemy.GammaSpawner;
 import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
@@ -18,6 +22,7 @@ public class TitleState extends State
 {
 	Abigail abig;
 	Sprite background;
+	Score score;
 	public TitleState()
 	{
 		super();
@@ -35,6 +40,7 @@ public class TitleState extends State
 		background.setScale(12f,10f);
 		
 		abig = new Abigail();
+		score=new Score(abig);
 		for(int x = 0; x < 1; ++x)
 		{
 			
@@ -43,7 +49,14 @@ public class TitleState extends State
 			//new Alpha(abig.getSprite(), 150, 100, "Alpha" + Math.random());
 			//new Gamma(abig.getSprite(), 50, 100, "Gamma" + Math.random(),100);
 			//new Delta(abig.getSprite(), 300, 200, "Delta"+Math.random());
-			new DeltaSpawner(abig.getSprite(), "DeltaSpawner"+Math.random(),0.1f,0.f,300.f,1000.f,500.f);
+			EnemySpawner a=new AlphaSpawner(abig.getSprite(), "AlphaSpawner"+Math.random(),1.f,0.f,300.f,1000.f,500.f);
+			EnemySpawner b=new BetaSpawner(abig.getSprite(), "BetaSpawner"+Math.random(),2.f,0.f,300.f,1000.f,500.f);
+			EnemySpawner d=new DeltaSpawner(abig.getSprite(), "DeltaSpawner"+Math.random(),0.2f,0.f,300.f,1000.f,500.f);
+			EnemySpawner g=new GammaSpawner(abig.getSprite(), "GammaSpawner"+Math.random(),3.f,0.f,300.f,1000.f,500.f);
+			a.setScoreBoard(score);
+			b.setScoreBoard(score);
+			d.setScoreBoard(score);
+			g.setScoreBoard(score);
 			//new Projectile();
 			
 			
