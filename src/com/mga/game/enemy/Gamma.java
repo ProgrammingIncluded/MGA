@@ -12,12 +12,11 @@ public class Gamma extends Enemy
 	protected float velX,velY,acceleration;
 	///velX and velY are now separate variables for velocity, from vel.
 	///acceleration is how much acceleration is directed towards the player.
-	public Gamma(Sprite player, int vel, int health, String name,float acc) 
+	public Gamma(Sprite player, int vel, int health, String name,float xPos,float yPos,float acc) 
 	{
-		super(player, vel, health, name);
+		super(player, vel, health, name,xPos,yPos);
 		acceleration=acc;
-		getSprite().setX((float) Math.random() * 100 + 50);
-		getSprite().setY((float) Math.random() * 100 + 50);
+
 		float dx = getPlayer().getX() - getSprite().getX();
 		float dy = getPlayer().getY() - getSprite().getY();
 		float theta = (float) (180.0 / Math.PI * Math.atan(dy / dx) - 90.0);
@@ -34,7 +33,7 @@ public class Gamma extends Enemy
 	}
 	public Gamma (Sprite player, int vel, int health, String name)
 	{
-		this(player, vel,health,name,1000);
+		this(player, vel,health,name,0,0,1000);
 	}
 	public Gamma()
 	{

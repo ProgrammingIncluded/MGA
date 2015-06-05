@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.game.engine.GameObject;
 import com.mga.logic.Enemy;
 
-public class EnemySpawner extends GameObject 
+public abstract class EnemySpawner<T extends Enemy> extends GameObject 
 {
 	protected Sprite player;
-	protected ArrayList <Enemy> enemyArrayList;
+	protected ArrayList <T> enemyArrayList;
 	protected float chargeTime, chargeMax;
+	protected float minX,minY,maxX,maxY;
 	public EnemySpawner()
 	{
 		this(null);
@@ -24,17 +25,17 @@ public class EnemySpawner extends GameObject
 	public EnemySpawner(Sprite player,String name) 
 	{
 		
-		this(player,name,1);
+		this(player,name,1,330,330,330,330);
 		
 	}
 	
 
 	
 
-	public EnemySpawner(Sprite player,String name, float chargeMax) {
+	public EnemySpawner(Sprite player,String name, float chargeMax,float minX,float minY,float maxX,float maxY) {
 		super(name);
 		this.player=player;
-		enemyArrayList=new ArrayList<Enemy>();
+		enemyArrayList=new ArrayList<T>();
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Alpha", "texture/enemy.png");
 		//spr.setScale(0.2f); // TODO: Add sprite scaling for all.
@@ -44,6 +45,47 @@ public class EnemySpawner extends GameObject
 		this.setIsVisible(false);
 		chargeTime = 0.f;
 		this.chargeMax = chargeMax;
+		this.minX=minX;
+		this.minY=minY;
+		this.maxX=maxX;
+		this.maxY=maxY;
+	}
+	
+	public float getChargeTime() {
+		return chargeTime;
+	}
+	public void setChargeTime(float chargeTime) {
+		this.chargeTime = chargeTime;
+	}
+	public float getChargeMax() {
+		return chargeMax;
+	}
+	public void setChargeMax(float chargeMax) {
+		this.chargeMax = chargeMax;
+	}
+	public float getMinX() {
+		return minX;
+	}
+	public void setMinX(float minX) {
+		this.minX = minX;
+	}
+	public float getMinY() {
+		return minY;
+	}
+	public void setMinY(float minY) {
+		this.minY = minY;
+	}
+	public float getMaxX() {
+		return maxX;
+	}
+	public void setMaxX(float maxX) {
+		this.maxX = maxX;
+	}
+	public float getMaxY() {
+		return maxY;
+	}
+	public void setMaxY(float maxY) {
+		this.maxY = maxY;
 	}
 	public Sprite getPlayer()
 	{
@@ -53,11 +95,11 @@ public class EnemySpawner extends GameObject
 	{
 		this.player = player;
 	}
-	public ArrayList<Enemy> getEnemyArrayList()
+	public ArrayList<T> getEnemyArrayList()
 	{
 		return enemyArrayList;
 	}
-	public void setEnemyArrayList(ArrayList<Enemy> enemyArrayList) 
+	public void setEnemyArrayList(ArrayList<T> enemyArrayList) 
 	{
 		this.enemyArrayList = enemyArrayList;
 	}
@@ -71,11 +113,11 @@ public class EnemySpawner extends GameObject
 		chargeTime+=dTime;
 		if(chargeTime>chargeMax){
 			chargeTime=0;
-			Enemy d=new Delta(player, 300, 200, "Delta"+Math.random());
+			T d=createEnemy();
 			enemyArrayList.add(d);
-			for (Iterator<Enemy> it = enemyArrayList.iterator(); it.hasNext() != false;)
+			for (Iterator<T> it = enemyArrayList.iterator(); it.hasNext() != false;)
 			{
-				Enemy enemy = it.next();
+				T enemy = it.next();
 				if(enemy.isDead())
 				{
 					it.remove();
@@ -85,5 +127,7 @@ public class EnemySpawner extends GameObject
 			System.out.println(enemyArrayList.size());
 		}
 	}
+	
+	protected abstract T createEnemy();
 
 }

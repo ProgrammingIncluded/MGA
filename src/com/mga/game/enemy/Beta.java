@@ -38,12 +38,12 @@ public class Beta extends Enemy
 	public Beta(Sprite player, int vel, int health, String name, float ct,
 			float cf)
 	{
-		this(player,vel,health,name,ct,cf,0);
+		this(player,vel,health,name,0,0,ct,cf,0);
 	}
-	public Beta(Sprite player, int vel, int health, String name, float ct,
+	public Beta(Sprite player, int vel, int health, String name,float xPos,float yPos, float ct,
 			float cf,float dev) 
 	{
-		super(player, vel, health, name);
+		super(player, vel, health, name,xPos,yPos);
 		chargeTime = ct;
 		chargeFraction = cf;
 		chargePeriod = 0;

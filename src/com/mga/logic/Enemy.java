@@ -14,12 +14,18 @@ public abstract class Enemy extends Shootable implements Killable
 	protected Sprite player;
 	protected float health;
 
-	public Enemy(Sprite player, int vel, int health, String name) 
+	public Enemy(Sprite player, int vel, int health, String name,float xPos,float yPos) 
 	{
 		super(name);
 		this.player = player;
 		this.health = health;
 		this.vel = vel;
+		//getSprite().setX(xPos);
+		//getSprite().setY(yPos);
+	}
+	public Enemy(Sprite player, int vel, int health, String name) 
+	{
+		this(player,vel,health,name,300,300);
 	}
 
 	public float getHealth() 

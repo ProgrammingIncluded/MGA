@@ -12,25 +12,29 @@ public class Delta extends Enemy
 	protected float frozenRadian,safeDistance;
 	///frozenRadian sets what degree value Delta will deviate if within safeDistance from x.
 	///safeDistance tells Delta when to stop moving away from Abigail.
-	public Delta(Sprite player, int vel, int health, String name,float fr,float sd) 
+	public Delta(Sprite player, int vel, int health, String name,float xPos,float yPos,float fr,float sd) 
 	{
-		super(player, vel, health, name);
+		super(player, vel, health, name,xPos,yPos);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Delta", "texture/enemy.png");
 		this.setSprite(spr);
-		getSprite().setX((float) Math.random() * 1000);
-		getSprite().setY((float) Math.random() * 400 + 400);
 		frozenRadian=fr;
 		safeDistance=sd;
+		getSprite().setX(xPos);
+		getSprite().setY(yPos);
 	}
 
 	public Delta(Sprite player, int vel, int health, String name) 
 	{
-		this(player,vel,health,name,(float)(Math.PI/4),100);
+		this(player,vel,health,name,300,300,(float)(Math.PI/4),100);
+	}
+	public Delta(Sprite player) 
+	{
+		this(player,300,100,"Delta"+Math.random());
 	}
 	public Delta()
 	{
-		this(null,200,1,"Delta"+Math.random());
+		this(null,300,1,"Delta"+Math.random());
 	}
 
 	@Override
