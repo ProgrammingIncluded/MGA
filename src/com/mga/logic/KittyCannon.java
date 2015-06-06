@@ -11,8 +11,9 @@ public class KittyCannon extends Weapon
 	{
 		super(-1, 50, 1);
 		setName("KittyCannon");
-		this.setAnimation(20, 3, 1f);
 		this.setSprite(sprHand.createSprite("KittyCannon", "bunny","textures/ERRTEX.jpg"));
+		this.setAnimation(20, 5, 1f);
+		this.getSprite().setScale(5f);
 	}
 
 	/**

@@ -8,9 +8,6 @@ import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
 import com.mga.game.engine.StateManager;
-import com.mga.logic.playfield.Abigail;
-import com.mga.logic.playfield.Cone;
-import com.mga.logic.playfield.ConeGenerator;
 
 public class TitleState extends State
 {
@@ -34,9 +31,7 @@ public class TitleState extends State
 		Sound snd = sndHandler.createSound("TestSound", "audio/title2.mp3");
 		snd.play();
 		GameObject.intialize();
-		new Abigail();
-		// Create the cones!
-		new ConeGenerator();
+		new KittyCannon();
 	}
 
 	@Override
@@ -52,8 +47,6 @@ public class TitleState extends State
 	{
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
 			stateM.exit();
-		if(Gdx.input.isKeyPressed(Input.Keys.O))
-			Cone.OVERLAP = !Cone.OVERLAP;
 		// Order of call does not matter, but best for update col after GO.
 		GameObject.update(Gdx.graphics.getDeltaTime());
 		CollisionObject.updateCollision();
