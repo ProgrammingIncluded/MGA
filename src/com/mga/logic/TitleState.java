@@ -76,6 +76,7 @@ public class TitleState extends State
 		background.draw(batch);
 		batch.end();
 		GameObject.draw(0.f);
+		//score.printOnScreen();
 
 	}
 
