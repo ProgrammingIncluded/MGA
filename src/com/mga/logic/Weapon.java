@@ -3,7 +3,7 @@ package com.mga.logic;
 import java.util.Hashtable;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mga.game.engine.GameObject;
+import com.mga.game.engine.CollisionObject;
 
 /**
  * Weapon base class for all Weapons. Allow internal tracking of all weapons
@@ -13,7 +13,7 @@ import com.mga.game.engine.GameObject;
  * @author Charles Chen
  *
  */
-public abstract class Weapon extends GameObject
+public abstract class Weapon extends CollisionObject
 {
 	/*Default Weapon Values*/
 	static final int DEF_DAMAGE = 1;

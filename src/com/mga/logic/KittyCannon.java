@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.mga.game.engine.CollisionObject;
 
 public class KittyCannon extends Weapon
 {
@@ -57,5 +58,12 @@ public class KittyCannon extends Weapon
 			move(new Vector2(0,-1));
 		}
     }
+
+	@Override
+	public void collided(CollisionObject colObj) {
+		if(!colObj.getName().equals("Abigail")){
+		}
+		
+	}
 
 }
