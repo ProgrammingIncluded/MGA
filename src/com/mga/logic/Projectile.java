@@ -3,7 +3,7 @@ package com.mga.logic;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
-import com.mga.logic.playfield.Abigail;
+import com.mga.logic.playfield.Nicholas;
 
 /**
  * Does nothing at the moment expect exist.
@@ -67,7 +67,7 @@ public abstract class Projectile extends CollisionObject {
 			this.setIsCollidable(false);
 			
 		}
-		if(colObj instanceof Abigail&&!this.getOwner().getName().equals("Abigail")){
+		if(colObj instanceof Nicholas&&!this.getOwner().getName().equals("Abigail")){
 			CollisionObject.removeGO(getName());
 			this.setIsCollidable(false);
 		}

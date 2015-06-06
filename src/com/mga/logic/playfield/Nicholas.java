@@ -14,7 +14,7 @@ import com.mga.logic.Score;
  * Test class for GameObject.
  *
  */
-public class Abigail extends CollisionObject
+public class Nicholas extends CollisionObject
 {
 	/* Local Variables */
 	public boolean isDead = false;
@@ -23,7 +23,7 @@ public class Abigail extends CollisionObject
 	public float tempFiringMech2=(float)(Math.PI/2);
 	public Score score;
 	
-	public Abigail()
+	public Nicholas()
 	{
 		super("Abigail");
 		Sprite spr = this.getSpriteHandler().createSprite(

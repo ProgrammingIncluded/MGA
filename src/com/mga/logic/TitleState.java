@@ -15,12 +15,12 @@ import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
 import com.mga.game.engine.StateManager;
-import com.mga.logic.playfield.Abigail;
+import com.mga.logic.playfield.Nicholas;
 import com.mga.logic.playfield.Cone;
 
 public class TitleState extends State
 {
-	Abigail abig;
+	Nicholas abig;
 	Sprite background;
 	Score score;
 	public TitleState()
@@ -39,7 +39,7 @@ public class TitleState extends State
 		background = sprHandler.createSprite("Air", "Air", "texture/dawn1.png");
 		background.setScale(12f,10f);
 		
-		abig = new Abigail();
+		abig = new Nicholas();
 		score=new Score(abig);
 		for(int x = 0; x < 1; ++x)
 		{
