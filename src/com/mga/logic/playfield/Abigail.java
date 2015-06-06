@@ -22,10 +22,9 @@ public class Abigail extends CollisionObject
 	{
 		super("Abigail");
 		Sprite spr = this.getSpriteHandler().createSprite(
-				this.getName(), "Abigail", "textures/ERRTEX.jpg");
-		spr.setScale(1);
+				this.getName(), "Abigail", "textures/runningcat.png");
 		this.setSprite(spr);
-		this.setAnimation(20, 5, 0.01f);
+		this.setAnimation(2, 4, 0.1f);
 	}
 
 	@Override

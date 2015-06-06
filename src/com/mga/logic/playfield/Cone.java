@@ -18,9 +18,10 @@ public class Cone extends CollisionObject
 		super("Cone"+String.valueOf(Math.random()));
 		Sprite spr = this.getSpriteHandler().createSprite(
 				this.getName(), "Cone", "texture/PowerUps/9.bmp"); //TODO custom sprite function, remove sprite handler.
-		spr.setScale(1.5f); // TODO: Add sprite scaling for all.
 		spr.setPosition(pos.x, pos.y);
 		this.setSprite(spr);
+		this.setAnimation(20, 5, 0.05f);
+		spr.setScale(5f); // TODO: Add sprite scaling for all.
 	}
 	
 	@Override
