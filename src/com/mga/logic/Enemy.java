@@ -8,7 +8,7 @@ import com.mga.game.engine.CollisionObject;
  * @author Nicky
  *
  */
-public abstract class Enemy extends Shootable implements Killable
+public abstract class Enemy extends Alive implements Killable
 {
 	protected int vel;
 	protected Sprite player;

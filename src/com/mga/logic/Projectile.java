@@ -6,14 +6,17 @@ import com.mga.game.engine.GameObject;
 import com.mga.logic.playfield.Nicholas;
 
 /**
- * Does nothing at the moment expect exist.
- * @author Nicky
+ * Project that is in charge of sending information packets across different
+ * @author Nicky & Charles
  *
  */
 public abstract class Projectile extends CollisionObject {
 	protected float damage;
 	protected GameObject owner;
+	
+	// If negative then no vanish time.
 	protected float timeLimit;
+	
 	public Projectile() {
 		// TODO Auto-generated constructor stub
 		this("Projectile"+Math.random());
@@ -40,10 +43,11 @@ public abstract class Projectile extends CollisionObject {
 				this.getName(), "Abigail", "texture/Pac/dot.png");
 		//spr.setScale(0.5f); // TODO: Add sprite scaling for all.
 		this.setSprite(spr);
-		if(owner!=null){
+		// DELETE
+		if(owner!=null)
+		{
 			setPosition(owner.getSprite().getX(),owner.getSprite().getY());
 		}
-		// TODO Auto-generated constructor stub
 	}
 
 	public float getDamage() {
@@ -57,35 +61,29 @@ public abstract class Projectile extends CollisionObject {
 	public GameObject getOwner() {
 		return owner;
 	}
-	public void setOwner(GameObject owner) {
+	
+	public boolean setOwner(GameObject owner) {
+		if(owner == null)
+			return false;
 		this.owner = owner;
+		return true;
 	}
+	
 	@Override
 	public void collided(CollisionObject colObj) {
-		if(colObj instanceof Shootable&&this.getOwner().getName().equals("Abigail")){
-			CollisionObject.removeGO(getName());
-			this.setIsCollidable(false);
-			
-		}
-		if(colObj instanceof Nicholas&&!this.getOwner().getName().equals("Abigail")){
-			CollisionObject.removeGO(getName());
-			this.setIsCollidable(false);
-		}
 		
-
 	}
 	
 	@Override
 	public void tick(float dTime) {
-		flightPattern(dTime);
-		timeLimit+=dTime;
+		bulletTick(dTime);
+		timeLimit += dTime;
 		if(timeLimit>5){
 			CollisionObject.removeGO(getName());
 			this.setIsCollidable(false);
 		}
-		
 	}
 	
-	public abstract void flightPattern(float dTime);
-
+	// Overided function 
+	public abstract void bulletTick(float deltaTime);
 }

@@ -29,6 +29,7 @@ public abstract class Weapon extends CollisionObject
 	/*Private Member Variables*/
 	private int weaponID; //!< Must be unique. Utilizes Weapon Count.
 	private int damage, fireRate, durability;
+	private Projectile projectile; // Variable to hold project instances.
 	
 	// Default constructor.
 	Weapon()

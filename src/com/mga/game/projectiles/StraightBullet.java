@@ -50,7 +50,7 @@ public class StraightBullet extends Projectile {
 	}
 
 	@Override
-	public void flightPattern(float dTime) {
+	public void bulletTick(float dTime) {
 		getSprite().setRotation((float)((frozenRadian)/Math.PI*180.0)-90.0f);
 		setPosition(
 				(float) (getSprite().getX() + dTime * getVel()

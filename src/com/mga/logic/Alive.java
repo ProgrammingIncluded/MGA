@@ -6,54 +6,58 @@ import com.mga.game.engine.CollisionObject;
 
 /**
  * This exists so that Projectile can collide and use onHit and Enemy can
- * interact.
+ * interact. 
  * 
- * @author Nicky
+ * @author Nicky & Charles Chen
  *
  */
-public abstract class Shootable extends CollisionObject 
+public abstract class Alive extends CollisionObject 
 {
-
-	public Shootable()
+	// Value to hold object stats.
+	private Stats stat;
+	public Alive()
 	{
 		// TODO Auto-generated constructor stub
 		this("Shootable" + Math.random());
 	}
 
-	public Shootable(String name)
+	public Alive(String name)
 	{
 		super(name);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	/**
+	 * Function to set stats. Sets directly, only checks if null.
+	 */
+	public boolean setStats(Stats stat)
+	{
+		if(stat == null)
+			return false;
+		
+		this.stat.health = stat.health;
+		this.stat.stamina = stat.stamina;
+		this.stat.strength = stat.strength;
+		return true;
+	}
+	
 	/**
 	 * If collided sees a Projectile, then onHit is called.
-	 * 
-	 * @param p
 	 */
 	@Override
 	public void collided(CollisionObject colObj) 
 	{
-		// TODO Auto-generated method stub
 		if (colObj instanceof Projectile) 
 		{
 			onHit((Projectile) (colObj));
 		}
-
 	}
-
-	@Override
-	public void tick(float dTime) 
-	{
-		// TODO Auto-generated method stub
-
-	}
+	
+	public abstract void tick(float dTime);
 
 	/**
 	 * OnHit does whatever is supposed to happen when this object hits a
 	 * projectile.
-	 * 
-	 * @param p
 	 */
 	public abstract void onHit(Projectile p);
 

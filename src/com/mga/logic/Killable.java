@@ -1,8 +1,10 @@
 package com.mga.logic;
 
+
 /**
  * Any GameObject that can be killed must implement this class.
  */
+
 public interface Killable
 {
 	/**
