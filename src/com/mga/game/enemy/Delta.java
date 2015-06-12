@@ -77,7 +77,7 @@ public class Delta extends Enemy
 					(float) (getSprite().getY() + dTime * getVel()
 							* Math.sin(Math.PI*3.0/2.0)));
 		}
-		checkIfOutOfBounds();
+		//checkIfOutOfBounds();
 
 	}
 	/**

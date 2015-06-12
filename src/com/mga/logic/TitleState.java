@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mga.game.enemy.AlphaSpawner;
@@ -15,14 +16,14 @@ import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
 import com.mga.game.engine.StateManager;
-import com.mga.logic.playfield.Nicholas;
 import com.mga.logic.playfield.Cone;
+import com.mga.logic.playfield.Nicholas;
 
 public class TitleState extends State
 {
 	Nicholas abig;
 	Sprite background;
-	Score score;
+	Score score; ///Score class
 	public TitleState()
 	{
 		super();
@@ -40,7 +41,7 @@ public class TitleState extends State
 		background.setScale(12f,10f);
 		
 		abig = new Nicholas();
-		score=new Score(abig);
+		score=new Score();
 		for(int x = 0; x < 1; ++x)
 		{
 			
@@ -73,10 +74,11 @@ public class TitleState extends State
 
 		SpriteBatch batch = new SpriteBatch();
 		batch.begin();
-		background.draw(batch);
+		//background.draw(batch);
+		score.draw(batch);
 		batch.end();
 		GameObject.draw(0.f);
-		//score.printOnScreen();
+		
 
 	}
 

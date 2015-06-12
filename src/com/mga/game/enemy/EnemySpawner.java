@@ -37,7 +37,25 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 	public EnemySpawner(Sprite player,String name, float chargeMax,float minX,float minY,float maxX,float maxY) {
 		super(name);
 		this.player=player;
-		enemyArrayList=new ArrayList<T>();
+		enemyArrayList=new ArrayList<T>(10);
+		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
+				"Alpha", "texture/enemy.png");
+		//spr.setScale(0.2f); // TODO: Add sprite scaling for all.
+		this.setSprite(spr);
+		getSprite().setX((float) Math.random() * 500);
+		getSprite().setY((float) Math.random() * 500);
+		this.setIsVisible(false);
+		chargeTime = 0.f;
+		this.chargeMax = chargeMax;
+		this.minX=minX;
+		this.minY=minY;
+		this.maxX=maxX;
+		this.maxY=maxY;
+	}
+	public EnemySpawner(Sprite player,String name, float chargeMax,float minX,float minY,float maxX,float maxY,int maxEnemies) {
+		super(name);
+		this.player=player;
+		enemyArrayList=new ArrayList<T>(maxEnemies);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Alpha", "texture/enemy.png");
 		//spr.setScale(0.2f); // TODO: Add sprite scaling for all.
@@ -117,19 +135,19 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 			chargeTime=0;
 			T d=createEnemy();
 			enemyArrayList.add(d);
-			for (Iterator<T> it = enemyArrayList.iterator(); it.hasNext() != false;)
-			{
-				T enemy = it.next();
-				if(enemy.isDead())
-				{
-					score.addPoints(1);
-					score.printPoints();
-					it.remove();
-					removeGO(enemy.getName());
-				}
-			}
-			//System.out.println(enemyArrayList.size());
 		}
+		for (Iterator<T> it = enemyArrayList.iterator(); it.hasNext() != false;)
+		{
+			T enemy = it.next();
+			if(enemy.isDead())
+			{
+				score.addPoints(1);
+				it.remove();
+				removeGO(enemy.getName());
+			}
+		}
+			//System.out.println(enemyArrayList.size());
+		
 	}
 	public void setScoreBoard(Score s){
 		score=s;
