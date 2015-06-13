@@ -3,6 +3,7 @@ package com.mga.game.engine;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.mga.logic.Config;
 import com.mga.logic.TitleState;
+import com.mga.logic.states.MenuState;
 
 public class MGA extends ApplicationAdapter 
 {	
@@ -51,9 +52,12 @@ public class MGA extends ApplicationAdapter
 
 		//First state needs to be manually started, for now.
 		// Create default state.
-		TitleState state = new TitleState();
+		/*TitleState state = new TitleState();
 		state.startUp(stateManager);
-		stateManager.pushState(state);
+		stateManager.pushState(state);*/
+		MenuState menuState=new MenuState();
+		menuState.startUp(stateManager);
+		stateManager.pushState(menuState);
 	}
 
 	@Override
