@@ -48,12 +48,11 @@ public class MGA extends ApplicationAdapter
 		texManager = new TextureManager();
 		sprHandler = new SpriteHandler(texManager.getErrorResource().resource);
 		sndHandler = new SoundHandler();
-
-		//First state needs to be manually started, for now.
+		
+		sprHandler.setTextureManager(texManager);
+		
 		// Create default state.
-		TitleState state = new TitleState();
-		state.startUp(stateManager);
-		stateManager.pushState(state);
+		stateManager.pushState(new TitleState());
 	}
 
 	@Override
