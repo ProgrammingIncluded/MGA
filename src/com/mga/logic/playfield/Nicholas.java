@@ -71,7 +71,10 @@ public class Nicholas extends CollisionObject
 				new StraightBullet(this,(float)(Math.PI/2-0.5),500);
 				tempFiringMech1=!tempFiringMech1;
 			}*/
-			new StraightBullet(this,(float)(tempFiringMech2),500);
+			int b=16;
+			for(int i=0;i<b;i++){
+				new StraightBullet(this,(float)(tempFiringMech2+2*i*Math.PI/b),500);
+			}
 			if(tempFiringMech2<(float)(Math.PI/4)||tempFiringMech2>(float)(3*Math.PI/4)){
 				tempFiringMech1=!tempFiringMech1;
 			}
@@ -81,6 +84,7 @@ public class Nicholas extends CollisionObject
 			else{
 				tempFiringMech2-=0.05;
 			}
+			
 			
 		}
 		

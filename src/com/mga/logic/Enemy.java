@@ -79,8 +79,7 @@ public abstract class Enemy extends Shootable implements Killable
 		attackPattern(dTime);
 		if(isDead())
 		{
-			CollisionObject.removeGO(getName());
-			this.setIsCollidable(false);
+
 		}
 
 	}
@@ -103,5 +102,9 @@ public abstract class Enemy extends Shootable implements Killable
 	public boolean isDead() 
 	{
 		return (getHealth() <= 0);
+	}
+	
+	public boolean isOutOfBounds(){
+		return (this.getSprite().getX()<0||this.getSprite().getX()>1200||this.getSprite().getY()<0||this.getSprite().getY()>1200);
 	}
 }

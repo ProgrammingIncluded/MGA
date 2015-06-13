@@ -138,7 +138,7 @@ public class Beta extends Enemy
 			{
 				chargePeriod = 0;
 				
-				 new StraightBullet(this,frozenRadian,300);
+				 //new StraightBullet(this,frozenRadian,300);
 
 				 
 			} 
