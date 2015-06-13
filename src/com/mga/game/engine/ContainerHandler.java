@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 public abstract class ContainerHandler<T>
 {
 	/* Private Variables  */
-	private LinkedHashMap <String, Container> containers; // name, Container
+	protected LinkedHashMap <String, Container> containers; // name, Container
 	private final Container defContainer; // Must have constant Default Texture
 	
 	ContainerHandler(String defContainerName, String defFileName, T containerObj)

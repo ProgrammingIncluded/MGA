@@ -65,6 +65,18 @@ public class SpriteHandler extends ContainerHandler<Sprite>
 			new Sprite(texManager.loadResource(textureName, fileName)));
 	} 
 	
+	// Delets the entire sprite and it's associated texture handler if
+	// texture handler is given.
+	public void deleteSprite(String spriteName)
+	{
+		Sprite spr = this.getContainer(spriteName);
+		Container cont = containers.remove(spriteName);
+		if(cont == null)
+			return;
+		if(texManager != null)
+			texManager.removeResource(cont.fileName);
+	}
+	
 	/* Getters and Setters */
 	public TextureManager getTextureManager()
 	{
