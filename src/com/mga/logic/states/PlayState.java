@@ -1,4 +1,4 @@
-package com.mga.logic;
+package com.mga.logic.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,15 +16,16 @@ import com.mga.game.engine.CollisionObject;
 import com.mga.game.engine.GameObject;
 import com.mga.game.engine.State;
 import com.mga.game.engine.StateManager;
+import com.mga.logic.Score;
 import com.mga.logic.playfield.Cone;
 import com.mga.logic.playfield.Nicholas;
 
-public class TitleState extends State
+public class PlayState extends State
 {
 	Nicholas abig;
 	Sprite background;
 	Score score; ///Score class
-	public TitleState()
+	public PlayState()
 	{
 		super();
 	}
@@ -78,8 +79,6 @@ public class TitleState extends State
 		score.draw(batch);
 		batch.end();
 		GameObject.draw(0.f);
-		
-
 	}
 
 	@Override

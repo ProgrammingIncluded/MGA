@@ -2,7 +2,7 @@ package com.mga.game.engine;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.mga.logic.Config;
-import com.mga.logic.TitleState;
+import com.mga.logic.states.TitleState;
 
 public class MGA extends ApplicationAdapter 
 {	
