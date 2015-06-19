@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.mga.logic.Config;
 import com.mga.logic.states.TitleState;
 
+
 public class MGA extends ApplicationAdapter 
 {	
 	/*Manager and Handlers*/

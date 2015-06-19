@@ -14,6 +14,7 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 	protected ArrayList <T> enemyArrayList;
 	protected float chargeTime, chargeMax;
 	protected float minX,minY,maxX,maxY;
+	protected int maxEnemies;
 	protected Score score;
 	public EnemySpawner()
 	{
@@ -37,7 +38,8 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 	public EnemySpawner(Sprite player,String name, float chargeMax,float minX,float minY,float maxX,float maxY) {
 		super(name);
 		this.player=player;
-		enemyArrayList=new ArrayList<T>(10);
+		maxEnemies=10;
+		enemyArrayList=new ArrayList<T>(maxEnemies);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Alpha", "texture/enemy.png");
 		//spr.setScale(0.2f); // TODO: Add sprite scaling for all.
@@ -55,6 +57,7 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 	public EnemySpawner(Sprite player,String name, float chargeMax,float minX,float minY,float maxX,float maxY,int maxEnemies) {
 		super(name);
 		this.player=player;
+		this.maxEnemies=maxEnemies;
 		enemyArrayList=new ArrayList<T>(maxEnemies);
 		Sprite spr = this.getSpriteHandler().createSprite(this.getName(),
 				"Alpha", "texture/enemy.png");
@@ -133,8 +136,23 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 		chargeTime+=dTime;
 		if(chargeTime>chargeMax){
 			chargeTime=0;
-			T d=createEnemy();
-			enemyArrayList.add(d);
+			
+			for (Iterator<T> it = enemyArrayList.iterator(); it.hasNext() != false;){
+				
+				T enemy = it.next();
+				if(!enemy.getIsCollidable()&&!enemy.getVisible()){
+					
+					enemy.setPosition((float) (minX + Math.random() * (maxX - minX)),
+							(float) (minY + Math.random() * (maxY - minY)));
+					enemy.setIsCollidable(true);
+					enemy.setIsVisible(true);
+				}
+			}
+			if(enemyArrayList.size()<=maxEnemies){
+				T d=createEnemy();
+				enemyArrayList.add(d);
+			}
+			
 		}
 		for (Iterator<T> it = enemyArrayList.iterator(); it.hasNext() != false;)
 		{
@@ -142,11 +160,17 @@ public abstract class EnemySpawner<T extends Enemy> extends GameObject
 			if(enemy.isDead())
 			{
 				score.addPoints(1);
-				it.remove();
-				removeGO(enemy.getName());
+				enemy.setIsCollidable(false);
+				enemy.setIsVisible(false);
+				enemy.setHealth(100.f);
+				
+			}
+			if(enemy.isOutOfBounds()){
+				enemy.setIsCollidable(false);
+				enemy.setIsVisible(false);
 			}
 		}
-			//System.out.println(enemyArrayList.size());
+			System.out.println(enemyArrayList.size());
 		
 	}
 	public void setScoreBoard(Score s){
