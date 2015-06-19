@@ -1,6 +1,7 @@
 package com.mga.logic.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -55,9 +56,13 @@ public class TitleState extends State
 			sprHandler.deleteContainer("LOGO");
 			this.texManager.removeResource("Logo");
 			stateM.popState();
-			stateM.pushState(new PlayState());			
+			stateM.pushState(new MenuState());			
 		}
 		++timer;
+		if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+		{
+			timer = waitTime;
+		}
 	}
 
 	@Override

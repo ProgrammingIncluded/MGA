@@ -20,23 +20,17 @@ public class MenuState extends State{
 	int tapLimiter;
 	public MenuState() {
 		// TODO Auto-generated constructor stub
-		MGALabel=new Label("MGA!!!(?)!",new LabelStyle(new BitmapFont(),new Color(Color.WHITE)));
+		MGALabel=new Label("MGA",new LabelStyle(new BitmapFont(),new Color(Color.WHITE)));
 		selectionLabels=new Label[2];
-		selectionLabels[0]=new Label("0: Play MGA",new LabelStyle(new BitmapFont(),new Color(Color.WHITE)));;
-		selectionLabels[1]=new Label("1: Settings MGA",new LabelStyle(new BitmapFont(),new Color(Color.WHITE)));;
+		selectionLabels[0]=new Label("Play",new LabelStyle(new BitmapFont(),new Color(Color.WHITE)));;
+		selectionLabels[1]=new Label("Settings",new LabelStyle(new BitmapFont(),new Color(Color.WHITE)));;
 		selectionLabelChooser=0;
 		tapLimiter=0;
 	}
 
 	@Override
 	public void startUp(StateManager stateM) {
-		// TODO Auto-generated method stub
-		sprHandler.setTextureManager(texManager);
-		Sound snd = sndHandler.createSound("TestSound", "audio/title2.mp3");
-		snd.play();
-		GameObject.intialize();
-		
-		
+		GameObject.intialize();	
 	}
 
 	@Override
@@ -57,30 +51,41 @@ public class MenuState extends State{
 			selectionLabels[i].draw(batch, 1.f);
 		}
 		batch.end();
-		
-		
 	}
 
 	@Override
 	public void update(StateManager stateM) {
+		boolean isEnter = false;
 		// TODO Auto-generated method stub
-		if(Gdx.input.isKeyPressed(Input.Keys.UP)&&tapLimiter>10){
+		if(Gdx.input.isKeyPressed(Input.Keys.UP) && tapLimiter>10){
 			selectionLabelChooser=(selectionLabelChooser+1)%2;
 			tapLimiter=0;
-		
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && tapLimiter > 10)
+		{
+			selectionLabelChooser=(selectionLabelChooser+1)%2;
+			tapLimiter=0;
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.ENTER))
+		{
+			isEnter = true;
 		}
 		tapLimiter++;
 		switch(selectionLabelChooser){
-		case 0:
-			selectionLabels[0].setColor(Color.YELLOW);
-			selectionLabels[1].setColor(Color.GRAY);
-			break;
-		case 1:
-			selectionLabels[0].setColor(Color.GRAY);
-			selectionLabels[1].setColor(Color.YELLOW);
-			break;
+			case 0:
+				selectionLabels[0].setColor(Color.YELLOW);
+				selectionLabels[1].setColor(Color.GRAY);
+				if(isEnter == true)
+				{
+					stateM.popState();
+					stateM.pushState(new PlayState());
+				}
+				break;
+			case 1:
+				selectionLabels[0].setColor(Color.GRAY);
+				selectionLabels[1].setColor(Color.YELLOW);
+				break;
 		}
-		
 	}
 
 	@Override
@@ -103,8 +108,7 @@ public class MenuState extends State{
 
 	@Override
 	public void cleanUp(StateManager stateM) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }
